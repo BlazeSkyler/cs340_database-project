@@ -1,0 +1,19 @@
+{
+  "name": "cs340",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BlazeSkyler/cs340_database-project.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/BlazeSkyler/cs340_database-project/issues"
+  },
+  "homepage": "https://github.com/BlazeSkyler/cs340_database-project#readme"
+}

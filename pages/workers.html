@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="../style.css" rel="stylesheet">
+    <script src="../scripts/workers.js"></script>
+    <title>38 Cupcakes</title>
+</head>
+<body>
+    <h1>Workers</h1>
+
+    <!-- links to pages -->
+    <nav>[ 
+        <a href="../index.html">Customers</a> |
+        <a href="workers.html">Workers</a> |
+        <a href="cupcakes.html">Cupcakes</a> |
+        <a href="orders.html">Orders</a> |
+        <a href="cupcakesordered.html">Cupcakes Ordered</a> ]
+    </nav>
+
+    <!-- displays table -->
+    <div id="display">
+        <h3>View workers</h3>
+
+        <table id="worker-table">
+            <tr>
+                <th id="new-button"><a href="#">New</a></th>
+                <th></th>
+                <th>ID</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Email</th>
+                <th>Phone #</th>
+            </tr>
+            <!-- sample data -->
+            <tr>
+                <td id="edit-button"><a href="#">Edit</a></td>
+                <td id="del-button"><a href="#">Delete</a></td>
+                <td align="center">1</td>
+                <td>Kevin</td>
+                <td>Juanda</td>
+                <td>jkevin@hello.com</td>
+                <td>521-759-318</td>
+            </tr>
+            <tr>
+                <td id="edit-button"><a href="#">Edit</a></td>
+                <td id="del-button"><a href="#">Delete</a></td>
+                <td align="center">2</td>
+                <td>Skyler</td>
+                <td>Ucol</td>
+                <td>uskyler@hello.com</td>
+                <td>531-872-375</td>
+            </tr>
+            <tr>
+                <td id="edit-button"><a href="#">Edit</a></td>
+                <td id="del-button"><a href="#">Delete</a></td>
+                <td align="center">3</td>
+                <td>Jenny</td>
+                <td>Kim</td>
+                <td>kjenny@hello.com</td>
+                <td>543-982-736</td>
+            </tr>
+        </table>
+    </div>
+
+    <p>&nbsp;</p>
+
+    <!-- insert new worker form -->
+    <div id="insert">
+        <h3>Add new worker</h3>
+
+        <form method="POST" id="add-worker">
+            <fieldset>
+                <label for="firstName">First Name</label> <input type="text" name="firstName" id="firstName">
+                <label for="lastName">Last Name</label> <input type="text" name="lastName" id="lastName">
+                <label for="email">Email</label> <input type="text" name="email" id="email">
+                <label for="phoneNum">Phone #</label> <input type="text" name="phoneNum" id="phoneNum">
+            </fieldset>
+            <input type="submit" id="add-worker-submit" value="Add Worker">
+            <input type="button" class="cancel" value="Cancel">
+        </form>
+    </div>
+
+    <p>&nbsp;</p>
+
+    <!-- edit existing worker form -->
+    <div id="edit">
+        <h3>Edit worker</h3>
+
+        <form method="POST" id="edit-worker">
+            <fieldset>
+                <p>ID: </p> <input type="hidden" name="workerID" id="workerID">
+                <label for="firstName">First Name</label> <input type="text" name="firstName" id="firstName">
+                <label for="lastName">Last Name</label> <input type="text" name="lastName" id="lastName">
+                <label for="email">Email</label> <input type="text" name="email" id="email">
+                <label for="phoneNum">Phone #</label> <input type="text" name="phoneNum" id="phoneNum">
+            </fieldset>
+            <input type="submit" id="edit-worker-submit" value="Update Worker">
+            <input type="button" class="cancel" value="Cancel">
+        </form>
+    </div>
+
+    <p>&nbsp;</p>
+
+    <!-- delete worker from database -->
+    <div id="delete">
+        <h3>Delete worker</h3>
+
+        <form method="POST" id="delete-worker">
+            <p>Are you sure you want to delete the following?</p>
+            <p><strong>ID: </strong></p>
+            <p><strong>First Name</strong></p>
+            <p><strong>Last Name</strong></p>
+            <input type="submit" id="delete-worker-submit" value="Delete Worker">
+            <input type="button" class="cancel" value="Cancel">
+        </form>
+    </div>
+    
+</body>
+</html>
