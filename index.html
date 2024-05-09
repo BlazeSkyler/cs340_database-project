@@ -4,16 +4,90 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="style.css" rel="stylesheet">
+    <!-- <script src=""></script> -->
     <title>38 Cupcakes</title>
 </head>
 <body>
     <h1>Cupcakes</h1>
-    <nav>
-        <a href="customers.html">Customers</a>
-        <a href="workers.html">Workers</a>
-        <a href="cupcakes.html">Cupcakes</a>
-        <a href="orders.html">Orders</a>
-        <a href="cupcakesordered.html">Cupcakes Ordered</a>
+
+    <nav>[ 
+        <a href="customers.html">Customers</a> |
+        <a href="workers.html">Workers</a> |
+        <a href="cupcakes.html">Cupcakes</a> |
+        <a href="orders.html">Orders</a> |
+        <a href="cupcakesordered.html">Cupcakes Ordered</a> ]
     </nav>
+
+    <div id="display">
+        <h3>View cupcakes being sold</h3>
+
+        <table id="cupcake-table">
+            <tr>
+                <th id="new-button"><a href="#">New</a></th>
+                <th></th>
+                <th>ID</th>
+                <th>Cake Flavor</th>
+                <th>Cake Color</th>
+                <th>Frosting Flavor</th>
+                <th>Frosting Color</th>
+                <th>Price</th>
+            </tr>
+        </table>
+    </div>
+
+    <p>&nbsp;</p>
+
+    <div id="insert">
+        <h3>Add new cupcake</h3>
+
+        <form method="POST" id="add-cupcake">
+            <fieldset>
+                <label>Cake Flavor</label> <input type="text" name="cakeFlavor">
+                <label>Cake Color</label> <input type="text" name="cakeColor">
+                <label>Frosting Flavor</label> <input type="text" name="frostingFlavor">
+                <label>Frosting Color</label> <input type="text" name="frostingColor">
+                <label>Price</label> <input type="number" min="0" name="price">
+            </fieldset>
+            <input type="submit" id="add-cupcake-submit" value="Add Cupcake">
+            <input type="button" id="cancel-add" value="Cancel">
+        </form>
+    </div>
+
+    <p>&nbsp;</p>
+
+    <div id="edit">
+        <h3>Edit cupcake</h3>
+
+        <form method="POST" id="edit-cupcake">
+            <fieldset>
+                <label>ID: </label> <input type="hidden" name="cupcakeID">
+                <label>Cake Flavor</label> <input type="text" name="cakeFlavor">
+                <label>Cake Color</label> <input type="text" name="cakeColor">
+                <label>Frosting Flavor</label> <input type="text" name="frostingFlavor">
+                <label>Frosting Color</label> <input type="text" name="frostingColor">
+                <label>Price</label> <input type="number" min="0" name="price">
+            </fieldset>
+            <input type="submit" id="edit-cupcake-submit" value="Update Cupcake">
+            <input type="button" id="cancel-edit" value="Cancel">
+        </form>
+    </div>
+
+    <p>&nbsp;</p>
+
+    <div id="delete">
+        <h3>Delete cupcake</h3>
+
+        <form method="POST" id="delete-cupcake">
+            <fieldset>
+                <p>Are you sure you want to delete the following?</p>
+                <label><strong>ID: </strong></label> <input type="hidden" name="cupcakeID">
+                <label><strong>Cake Flavor</strong></label>
+                <label><strong>Frosting Flavor</strong></label>
+            </fieldset>
+            <input type="submit" id="delete-cupcake-submit" value="Delete Cupcake">
+            <input type="button" id="cancel-edit" value="Cancel">
+        </form>
+    </div>
+    
 </body>
 </html>
