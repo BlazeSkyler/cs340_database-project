@@ -4,120 +4,115 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="style.css" rel="stylesheet">
-    <script src="./scripts/cupcakes.js"></script>
+    <script src="./scripts/customers.js"></script>
     <title>38 Cupcakes</title>
 </head>
 <body>
-    <h1>Cupcakes</h1>
+    <h1>Customers</h1>
 
     <!-- links to pages -->
     <nav>[ 
-        <a href="index.html">Cupcakes</a> |
-        <a href="customers.html">Customers</a> |
-        <a href="workers.html">Workers</a> |
-        <a href="orders.html">Orders</a> |
-        <a href="cupcakesordered.html">Cupcakes Ordered</a> ]
+        <a href="index.html">Customers</a> |
+        <a href="./pages/workers.html">Workers</a> |
+        <a href="./pages/cupcakes.html">Cupcakes</a> |
+        <a href="./pages/orders.html">Orders</a> |
+        <a href="./pages/cupcakesordered.html">Cupcakes Ordered</a> ]
     </nav>
 
     <!-- displays table -->
     <div id="display">
-        <h3>View cupcakes being sold</h3>
+        <h3>View customers</h3>
 
-        <table id="cupcake-table">
+        <table id="customer-table">
             <tr>
                 <th id="new-button"><a href="#">New</a></th>
                 <th></th>
                 <th>ID</th>
-                <th>Cake Flavor</th>
-                <th>Cake Color</th>
-                <th>Frosting Flavor</th>
-                <th>Frosting Color</th>
-                <th>Price</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Email</th>
+                <th>Phone #</th>
             </tr>
+            <!-- sample data -->
             <tr>
                 <td id="edit-button"><a href="#">Edit</a></td>
                 <td id="del-button"><a href="#">Delete</a></td>
                 <td align="center">1</td>
-                <td>Vanilla</td>
-                <td>White</td>
-                <td>Strawberry</td>
-                <td>Red</td>
-                <td>5</td>
+                <td>Steven</td>
+                <td>Lee</td>
+                <td>lsteven@hello.com</td>
+                <td>505-584-192</td>
             </tr>
             <tr>
                 <td id="edit-button"><a href="#">Edit</a></td>
                 <td id="del-button"><a href="#">Delete</a></td>
                 <td align="center">2</td>
-                <td>Mint Oreo</td>
-                <td>Black</td>
-                <td>Peanut Butter</td>
-                <td>Brown</td>
-                <td>10</td>
+                <td>John</td>
+                <td>Smith</td>
+                <td>sjohn@hello.com</td>
+                <td>555-730-183</td>
             </tr>
             <tr>
                 <td id="edit-button"><a href="#">Edit</a></td>
                 <td id="del-button"><a href="#">Delete</a></td>
                 <td align="center">3</td>
-                <td>Mocha</td>
-                <td>Brown</td>
-                <td>Red Velvet</td>
-                <td>Red</td>
-                <td>15</td>
+                <td>Brenda</td>
+                <td>Gates</td>
+                <td>gbrenda@hello.com</td>
+                <td>564-104-769</td>
             </tr>
         </table>
     </div>
 
     <p>&nbsp;</p>
 
-    <!-- insert new cupcake form -->
+    <!-- insert new customer form -->
     <div id="insert">
-        <h3>Add new cupcake</h3>
+        <h3>Add new customer</h3>
 
-        <form method="POST" id="add-cupcake">
+        <form method="POST" id="add-customer">
             <fieldset>
-                <label for="cakeFlavor">Cake Flavor</label> <input type="text" name="cakeFlavor" id="cakeFlavor">
-                <label for="cakeColor">Cake Color</label> <input type="text" name="cakeColor" id="cakeColor">
-                <label for="frostingFlavor">Frosting Flavor</label> <input type="text" name="frostingFlavor" id="frostingFlavor">
-                <label for="frostingColor">Frosting Color</label> <input type="text" name="frostingColor" id="frostingColor">
-                <label for="price">Price</label> <input type="number" min="0" name="price" id="price">
+                <label for="firstName">First Name</label> <input type="text" name="firstName" id="firstName">
+                <label for="lastName">Last Name</label> <input type="text" name="lastName" id="lastName">
+                <label for="email">Email</label> <input type="text" name="email" id="email">
+                <label for="phoneNum">Phone #</label> <input type="text" name="phoneNum" id="phoneNum">
             </fieldset>
-            <input type="submit" id="add-cupcake-submit" value="Add Cupcake">
+            <input type="submit" id="add-customer-submit" value="Add Customer">
             <input type="button" class="cancel" value="Cancel">
         </form>
     </div>
 
     <p>&nbsp;</p>
 
-    <!-- edit existing cupcake form -->
+    <!-- edit existing customer form -->
     <div id="edit">
-        <h3>Edit cupcake</h3>
+        <h3>Edit customer</h3>
 
-        <form method="POST" id="edit-cupcake">
+        <form method="POST" id="edit-customer">
             <fieldset>
-                <p>ID: </p> <input type="hidden" name="cupcakeID" id="cupcakeID">
-                <label for="cakeFlavor">Cake Flavor</label> <input type="text" name="cakeFlavor" id="cakeFlavor">
-                <label for="cakeColor">Cake Color</label> <input type="text" name="cakeColor" id="cakeColor">
-                <label for="frostingFlavor">Frosting Flavor</label> <input type="text" name="frostingFlavor" id="frostingFlavor">
-                <label for="frostingColor">Frosting Color</label> <input type="text" name="frostingColor" id="frostingColor">
-                <label for="price">Price</label> <input type="number" min="0" name="price" id="price">
+                <p>ID: </p> <input type="hidden" name="customerID" id="customerID">
+                <label for="firstName">First Name</label> <input type="text" name="firstName" id="firstName">
+                <label for="lastName">Last Name</label> <input type="text" name="lastName" id="lastName">
+                <label for="email">Email</label> <input type="text" name="email" id="email">
+                <label for="phoneNum">Phone #</label> <input type="text" name="phoneNum" id="phoneNum">
             </fieldset>
-            <input type="submit" id="edit-cupcake-submit" value="Update Cupcake">
+            <input type="submit" id="edit-customer-submit" value="Update Customer">
             <input type="button" class="cancel" value="Cancel">
         </form>
     </div>
 
     <p>&nbsp;</p>
 
-    <!-- delete cupcake from database -->
+    <!-- delete customer from database -->
     <div id="delete">
-        <h3>Delete cupcake</h3>
+        <h3>Delete customer</h3>
 
-        <form method="POST" id="delete-cupcake">
+        <form method="POST" id="delete-customer">
             <p>Are you sure you want to delete the following?</p>
             <p><strong>ID: </strong></p>
-            <p><strong>Cake Flavor</strong></p>
-            <p><strong>Frosting Flavor</strong></p>
-            <input type="submit" id="delete-cupcake-submit" value="Delete Cupcake">
+            <p><strong>First Name</strong></p>
+            <p><strong>Last Name</strong></p>
+            <input type="submit" id="delete-customer-submit" value="Delete Customer">
             <input type="button" class="cancel" value="Cancel">
         </form>
     </div>
