@@ -5,7 +5,7 @@ SET AUTOCOMMIT = 0;
 
 -- Customers Table
 CREATE OR REPLACE TABLE Customers (
-    customerID int NOT NULL AUTO_INCREMENT,
+    customerID int NOT NULL UNIQUE AUTO_INCREMENT,
     firstName varchar(20) NOT NULL,
     lastName varchar(20) NOT NULL,
     email varchar(45),
@@ -15,7 +15,7 @@ CREATE OR REPLACE TABLE Customers (
 
 -- Workers Table
 CREATE OR REPLACE TABLE Workers (
-    workerID int NOT NULL AUTO_INCREMENT,
+    workerID int NOT NULL UNIQUE AUTO_INCREMENT,
     firstName varchar(20) not null,
     lastName varchar(20) not null,
     email varchar(45),
@@ -25,7 +25,7 @@ CREATE OR REPLACE TABLE Workers (
 
 -- Orders Table
 CREATE OR REPLACE TABLE Orders (
-    orderID int NOT NULL AUTO_INCREMENT,
+    orderID int NOT NULL UNIQUE AUTO_INCREMENT,
     customerID int NOT NULL,
     workerID int NOT NULL,
     datePlaced date NOT NULL,
@@ -38,7 +38,7 @@ CREATE OR REPLACE TABLE Orders (
 
 -- Cupcakes Table
 CREATE OR REPLACE TABLE Cupcakes (
-    cupcakeID int NOT NULL AUTO_INCREMENT,
+    cupcakeID int NOT NULL UNIQUE AUTO_INCREMENT,
     cakeFlavor varchar(25) NOT NULL,
     cakeColor varchar(20),
     frostingFlavor varchar(25),
@@ -49,7 +49,7 @@ CREATE OR REPLACE TABLE Cupcakes (
 
 -- CupcakesOrdered Table
 CREATE OR REPLACE TABLE CupcakesOrdered (
-    cupcakesOrderedID int AUTO_INCREMENT,
+    cupcakesOrderedID int NOT NULL UNIQUE AUTO_INCREMENT,
     orderID int NOT NULL,
     cupcakeID int NOT NULL,
     quantity int(5) NOT NULL,
