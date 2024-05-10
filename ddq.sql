@@ -47,5 +47,14 @@ INSERT INTO CupcakesOrdered (orderID, cupcakeID, quantity) VALUES (:orderIDInput
 -- update an Order's data based on submission of the Update Order form
 UPDATE Orders SET customerID = :customerIDInput, workerID = :workerIDInput, datePlaced = :datePlacedInput, datePickedup = :datePickedupInput, totalPrice = :totalPriceInput WHERE orderID = :orderID_from_the_update_form
 
+-- delete an Order's association with a Cupcake (M-to-M relationship deletion)
+DELETE FROM CupcakesOrdered WHERE orderID = :orderID_selected_from_browse_order_page AND cupcakeID = :cupcakeID_selected_from-browse_order_page
+
+-- delete a Customer
+DELETE FROM Customers WHERE customerID = :customerID_selected_from_browse_customer_page
+
+-- delete a Worker
+DELETE FROM Workers WHERE workerID = :workerID_selected_from_browse_worker_page
+
 -- delete an Order
 DELETE FROM Orders WHERE orderID = :orderID_selected_from_browse_order_page
