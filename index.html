@@ -19,6 +19,22 @@
         <a href="./pages/cupcakesordered.html">Cupcakes Ordered</a> ]
     </nav>
 
+    <!-- insert new customer form -->
+    <div id="insert">
+        <h3>Add new customer</h3>
+
+        <form method="POST" id="add-customer">
+            <fieldset>
+                <label for="firstName">First Name</label> <input type="text" name="firstName" id="firstName">
+                <label for="lastName">Last Name</label> <input type="text" name="lastName" id="lastName">
+                <label for="email">Email</label> <input type="text" name="email" id="email">
+                <label for="phoneNum">Phone #</label> <input type="text" name="phoneNum" id="phoneNum">
+            </fieldset>
+            <input type="submit" id="add-customer-submit" value="Add Customer">
+            <input type="button" class="cancel" value="Cancel">
+        </form>
+    </div>
+
     <!-- displays table -->
     <div id="display">
         <h3>View customers</h3>
@@ -64,33 +80,13 @@
         </table>
     </div>
 
-    <p>&nbsp;</p>
-
-    <!-- insert new customer form -->
-    <div id="insert">
-        <h3>Add new customer</h3>
-
-        <form method="POST" id="add-customer">
-            <fieldset>
-                <label for="firstName">First Name</label> <input type="text" name="firstName" id="firstName">
-                <label for="lastName">Last Name</label> <input type="text" name="lastName" id="lastName">
-                <label for="email">Email</label> <input type="text" name="email" id="email">
-                <label for="phoneNum">Phone #</label> <input type="text" name="phoneNum" id="phoneNum">
-            </fieldset>
-            <input type="submit" id="add-customer-submit" value="Add Customer">
-            <input type="button" class="cancel" value="Cancel">
-        </form>
-    </div>
-
-    <p>&nbsp;</p>
-
     <!-- edit existing customer form -->
     <div id="edit">
         <h3>Edit customer</h3>
 
         <form method="POST" id="edit-customer">
             <fieldset>
-                <p>ID: </p> <input type="hidden" name="customerID" id="customerID">
+                <p><strong>ID: </strong></p> <input type="hidden" name="customerID" id="customerID">
                 <label for="firstName">First Name</label> <input type="text" name="firstName" id="firstName">
                 <label for="lastName">Last Name</label> <input type="text" name="lastName" id="lastName">
                 <label for="email">Email</label> <input type="text" name="email" id="email">
@@ -101,8 +97,6 @@
         </form>
     </div>
 
-    <p>&nbsp;</p>
-
     <!-- delete customer from database -->
     <div id="delete">
         <h3>Delete customer</h3>
@@ -110,8 +104,8 @@
         <form method="POST" id="delete-customer">
             <p>Are you sure you want to delete the following?</p>
             <p><strong>ID: </strong></p>
-            <p><strong>First Name</strong></p>
-            <p><strong>Last Name</strong></p>
+            <p><strong>First Name: </strong></p>
+            <p><strong>Last Name: </strong></p>
             <input type="submit" id="delete-customer-submit" value="Delete Customer">
             <input type="button" class="cancel" value="Cancel">
         </form>

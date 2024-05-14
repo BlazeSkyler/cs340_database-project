@@ -19,6 +19,31 @@
         <a href="cupcakesordered.html">Cupcakes Ordered</a> ]
     </nav>
 
+    <!-- insert new cupcakesOrdered form -->
+    <div id="insert">
+        <h3>Add new cupcakesOrdered</h3>
+
+        <form method="POST" id="add-cupcakesOrdered">
+            <fieldset>
+                <label for="orderID">Order ID</label> <select name="orderID" id="orderID">
+                    <option value="0">&nbsp;</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                </select>
+                <label for="cupcakeID">Cupcake ID</label> <select name="cupcakeID" id="cupcakeID">
+                    <option value="0">&nbsp;</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                </select>
+                <label for="quantity">Quantity</label> <input type="number" name="quantity" id="quantity">
+            </fieldset>
+            <input type="submit" id="add-cupcakesOrdered-submit" value="Add CupcakesOrdered">
+            <input type="button" class="cancel" value="Cancel">
+        </form>
+    </div>
+
     <!-- displays table -->
     <div id="display">
         <h3>View cupcakes in orders</h3>
@@ -60,42 +85,13 @@
         </table>
     </div>
 
-    <p>&nbsp;</p>
-
-    <!-- insert new cupcakesOrdered form -->
-    <div id="insert">
-        <h3>Add new cupcakesOrdered</h3>
-
-        <form method="POST" id="add-cupcakesOrdered">
-            <fieldset>
-                <label for="orderID">Order ID</label> <select name="orderID" id="orderID">
-                    <option value="0">&nbsp;</option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                </select>
-                <label for="cupcakeID">Cupcake ID</label> <select name="cupcakeID" id="cupcakeID">
-                    <option value="0">&nbsp;</option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                </select>
-                <label for="quantity">Quantity</label> <input type="number" name="quantity" id="quantity">
-            </fieldset>
-            <input type="submit" id="add-cupcakesOrdered-submit" value="Add CupcakesOrdered">
-            <input type="button" class="cancel" value="Cancel">
-        </form>
-    </div>
-
-    <p>&nbsp;</p>
-
     <!-- edit existing cupcakesOrdered form -->
     <div id="edit">
         <h3>Edit cupcakesOrdered</h3>
 
         <form method="POST" id="edit-cupcakesOrdered">
             <fieldset>
-                <p>ID: </p> <input type="hidden" name="cupcakesOrderedID" id="cupcakesOrderedID">
+                <p><strong>ID: </strong></p> <input type="hidden" name="cupcakesOrderedID" id="cupcakesOrderedID">
                 <label for="orderID">Order ID</label> <select name="orderID" id="orderID">
                     <option value="0">&nbsp;</option>
                     <option value="1">1</option>
@@ -114,8 +110,6 @@
             <input type="button" class="cancel" value="Cancel">
         </form>
     </div>
-
-    <p>&nbsp;</p>
 
     <!-- delete cupcakesOrdered from database -->
     <div id="delete">

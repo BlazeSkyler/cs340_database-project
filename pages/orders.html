@@ -19,6 +19,33 @@
         <a href="cupcakesordered.html">Cupcakes Ordered</a> ]
     </nav>
 
+    <!-- insert new order form -->
+    <div id="insert">
+        <h3>Add new order</h3>
+
+        <form method="POST" id="add-order">
+            <fieldset>
+                <label for="customerID">Customer ID</label> <select name="customerID" id="customerID">
+                    <option value="0">&nbsp;</option>
+                    <option value="1">Steven Lee</option>
+                    <option value="2">John Smith</option>
+                    <option value="3">Brenda Gates</option>
+                </select>
+                <label for="workerID">Worker ID</label> <select name="workerID" id="workerID">
+                    <option value="0">&nbsp;</option>
+                    <option value="1">Kevin Juanda</option>
+                    <option value="2">Skyler Ucol</option>
+                    <option value="3">Jenny Kim</option>
+                </select>
+                <label for="datePlaced">Date Placed</label> <input type="date" name="datePlaced" id="datePlaced">
+                <label for="datePickedup">Date Pickedup</label> <input type="date" name="datePickedup" id="datePickedup">
+                <label for="totalPrice">Total Price</label> <input type="number" min="0" step=".01" name="totalPrice" id="totalPrice">
+            </fieldset>
+            <input type="submit" id="add-order-submit" value="Add Order">
+            <input type="button" class="cancel" value="Cancel">
+        </form>
+    </div>
+
     <!-- displays table -->
     <div id="display">
         <h3>View customer orders</h3>
@@ -68,44 +95,13 @@
         </table>
     </div>
 
-    <p>&nbsp;</p>
-
-    <!-- insert new order form -->
-    <div id="insert">
-        <h3>Add new order</h3>
-
-        <form method="POST" id="add-order">
-            <fieldset>
-                <label for="customerID">Customer ID</label> <select name="customerID" id="customerID">
-                    <option value="0">&nbsp;</option>
-                    <option value="1">Steven Lee</option>
-                    <option value="2">John Smith</option>
-                    <option value="3">Brenda Gates</option>
-                </select>
-                <label for="workerID">Worker ID</label> <select name="workerID" id="workerID">
-                    <option value="0">&nbsp;</option>
-                    <option value="1">Kevin Juanda</option>
-                    <option value="2">Skyler Ucol</option>
-                    <option value="3">Jenny Kim</option>
-                </select>
-                <label for="datePlaced">Date Placed</label> <input type="date" name="datePlaced" id="datePlaced">
-                <label for="datePickedup">Date Pickedup</label> <input type="date" name="datePickedup" id="datePickedup">
-                <label for="totalPrice">Total Price</label> <input type="number" min="0" step=".01" name="totalPrice" id="totalPrice">
-            </fieldset>
-            <input type="submit" id="add-order-submit" value="Add Order">
-            <input type="button" class="cancel" value="Cancel">
-        </form>
-    </div>
-
-    <p>&nbsp;</p>
-
     <!-- edit existing order form -->
     <div id="edit">
         <h3>Edit order</h3>
 
         <form method="POST" id="edit-order">
             <fieldset>
-                <p>ID: </p> <input type="hidden" name="orderID" id="orderID">
+                <p><strong>ID: </strong></p> <input type="hidden" name="orderID" id="orderID">
                 <label for="customerID">Customer ID</label> <select name="customerID" id="customerID">
                     <option value="0">&nbsp;</option>
                     <option value="1">Steven Lee</option>
@@ -126,8 +122,6 @@
             <input type="button" class="cancel" value="Cancel">
         </form>
     </div>
-
-    <p>&nbsp;</p>
 
     <!-- delete order from database -->
     <div id="delete">

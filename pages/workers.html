@@ -19,6 +19,22 @@
         <a href="cupcakesordered.html">Cupcakes Ordered</a> ]
     </nav>
 
+    <!-- insert new worker form -->
+    <div id="insert">
+        <h3>Add new worker</h3>
+
+        <form method="POST" id="add-worker">
+            <fieldset>
+                <label for="firstName">First Name</label> <input type="text" name="firstName" id="firstName">
+                <label for="lastName">Last Name</label> <input type="text" name="lastName" id="lastName">
+                <label for="email">Email</label> <input type="text" name="email" id="email">
+                <label for="phoneNum">Phone #</label> <input type="text" name="phoneNum" id="phoneNum">
+            </fieldset>
+            <input type="submit" id="add-worker-submit" value="Add Worker">
+            <input type="button" class="cancel" value="Cancel">
+        </form>
+    </div>
+
     <!-- displays table -->
     <div id="display">
         <h3>View workers</h3>
@@ -64,33 +80,13 @@
         </table>
     </div>
 
-    <p>&nbsp;</p>
-
-    <!-- insert new worker form -->
-    <div id="insert">
-        <h3>Add new worker</h3>
-
-        <form method="POST" id="add-worker">
-            <fieldset>
-                <label for="firstName">First Name</label> <input type="text" name="firstName" id="firstName">
-                <label for="lastName">Last Name</label> <input type="text" name="lastName" id="lastName">
-                <label for="email">Email</label> <input type="text" name="email" id="email">
-                <label for="phoneNum">Phone #</label> <input type="text" name="phoneNum" id="phoneNum">
-            </fieldset>
-            <input type="submit" id="add-worker-submit" value="Add Worker">
-            <input type="button" class="cancel" value="Cancel">
-        </form>
-    </div>
-
-    <p>&nbsp;</p>
-
     <!-- edit existing worker form -->
     <div id="edit">
         <h3>Edit worker</h3>
 
         <form method="POST" id="edit-worker">
             <fieldset>
-                <p>ID: </p> <input type="hidden" name="workerID" id="workerID">
+                <p><strong>ID: </strong></p> <input type="hidden" name="workerID" id="workerID">
                 <label for="firstName">First Name</label> <input type="text" name="firstName" id="firstName">
                 <label for="lastName">Last Name</label> <input type="text" name="lastName" id="lastName">
                 <label for="email">Email</label> <input type="text" name="email" id="email">
@@ -110,8 +106,8 @@
         <form method="POST" id="delete-worker">
             <p>Are you sure you want to delete the following?</p>
             <p><strong>ID: </strong></p>
-            <p><strong>First Name</strong></p>
-            <p><strong>Last Name</strong></p>
+            <p><strong>First Name: </strong></p>
+            <p><strong>Last Name: </strong></p>
             <input type="submit" id="delete-worker-submit" value="Delete Worker">
             <input type="button" class="cancel" value="Cancel">
         </form>
