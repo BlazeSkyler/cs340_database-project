@@ -1,0 +1,24 @@
+<table>
+    <thead>
+        <tr>
+            {{#each data.[0]}}
+            <th>
+                {{@key}}
+            </th>
+            {{/each}}
+        </tr>
+    </thead>
+
+    <tbody>
+        {{#each data}}
+        <tr>
+            <td>{{this.cupcakeID}}</td>
+            <td>{{this.cakeFlavor}}</td>
+            <td>{{this.cakeColor}}</td>
+            <td>{{this.frostingFlavor}}</td>
+            <td>{{this.frostingColor}}</td>
+            <td>{{this.price}}</td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>

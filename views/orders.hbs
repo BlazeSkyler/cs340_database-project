@@ -1,0 +1,24 @@
+<table>
+    <thead>
+        <tr>
+            {{#each data.[0]}}
+            <th>
+                {{@key}}
+            </th>
+            {{/each}}
+        </tr>
+    </thead>
+
+    <tbody>
+        {{#each data}}
+        <tr>
+            <td>{{this.orderID}}</td>
+            <td>{{this.customerID}}</td>
+            <td>{{this.workerID}}</td>
+            <td>{{this.datePlaced}}</td>
+            <td>{{this.datePickedup}}</td>
+            <td>{{this.totalPrice}}</td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>

@@ -15,5 +15,11 @@
   "bugs": {
     "url": "https://github.com/BlazeSkyler/cs340_database-project/issues"
   },
-  "homepage": "https://github.com/BlazeSkyler/cs340_database-project#readme"
+  "homepage": "https://github.com/BlazeSkyler/cs340_database-project#readme",
+  "dependencies": {
+    "express": "^4.19.2",
+    "express-handlebars": "^7.1.2",
+    "forever": "^4.0.3",
+    "mysql": "^2.18.1"
+  }
 }
