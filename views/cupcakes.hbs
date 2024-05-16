@@ -1,10 +1,10 @@
 <table>
     <thead>
         <tr>
+            <th>Add</th> 
+            <th></th>
             {{#each data.[0]}}
-            <th>
-                {{@key}}
-            </th>
+            <th>{{@key}}</th>
             {{/each}}
         </tr>
     </thead>
@@ -12,6 +12,8 @@
     <tbody>
         {{#each data}}
         <tr>
+            <td>Edit</td>
+            <td>Delete</td>
             <td>{{this.cupcakeID}}</td>
             <td>{{this.cakeFlavor}}</td>
             <td>{{this.cakeColor}}</td>

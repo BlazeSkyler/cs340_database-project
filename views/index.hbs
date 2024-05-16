@@ -1,10 +1,28 @@
+{{!-- insert --}}
+{{!-- <div id="insert" display:> --}}
+    <h3>Add new customer</h3>
+    <form id="add-customer-form-ajax">
+        <fieldset>
+            <label for="firstName">First Name</label> <input type="text" name="firstName" id="firstName">
+            <label for="lastName">Last Name</label> <input type="text" name="lastName" id="lastName">
+            <label for="email">Email</label> <input type="text" name="email" id="email">
+            <label for="phoneNum">Phone #</label> <input type="text" name="phoneNum" id="phoneNum">
+        </fieldset>
+        <input type="submit" id="add-customer-submit" value="Add Customer">
+        <input type="button" class="cancel" value="Cancel">
+    </form>
+{{!-- </div> --}}
+<script src="./js/add_customer.js"></script>
+
+{{!-- display tables --}}
+<h3>View customers</h3>
 <table>
     <thead>
         <tr>
-            {{#each data.[0]}}
-            <th>
-                {{@key}}
-            </th>
+            <th>Add</th> 
+            <th></th>
+            {{#each data.[0]}}   
+            <th>{{@key}}</th>
             {{/each}}
         </tr>
     </thead>
@@ -12,6 +30,8 @@
     <tbody>
         {{#each data}}
         <tr>
+            <td>Edit</td>
+            <td>Delete</td>
             <td>{{this.customerID}}</td>
             <td>{{this.firstName}}</td>
             <td>{{this.lastName}}</td>
@@ -21,5 +41,3 @@
         {{/each}}
     </tbody>
 </table>
-
-{{!-- <h1>HI</h1> --}}
