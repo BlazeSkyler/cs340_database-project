@@ -74,7 +74,7 @@ INSERT INTO Cupcakes (cakeFlavor, cakeColor, frostingFlavor, frostingColor, pric
 VALUES ('Vanilla', 'White', 'Strawberry', 'Red', 5),
 ('Mint Oreo', 'Black', 'Peanut Butter', 'Brown', 10),
 ('Mocha', 'Brown', 'Red Velvet', 'Red', 15),
-('Chocolate', 'Brown', NULL, NULL, 25);
+('Chocolate', NULL, 'Oreo', NULL, 25);
 
 INSERT INTO Orders (customerID, workerID, datePlaced, datePickedup, totalPrice)
 VALUES ((SELECT customerID FROM Customers WHERE firstName = 'Brenda' AND lastName = 'Gates'), 
