@@ -33,7 +33,7 @@ CREATE OR REPLACE TABLE Orders (
     totalPrice decimal(19,2) NOT NULL,
     PRIMARY KEY (orderID),
     FOREIGN KEY (customerID) REFERENCES Customers(customerID) ON DELETE CASCADE,
-    FOREIGN KEY (workerID) REFERENCES Workers(workerID) ON DELETE CASCADE
+    FOREIGN KEY (workerID) REFERENCES Workers(workerID) ON DELETE SET NULL
 );
 
 -- Cupcakes Table
