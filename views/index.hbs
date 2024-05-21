@@ -35,8 +35,8 @@
             <td>{{this.customerID}}</td>
             <td>{{this.firstName}}</td>
             <td>{{this.lastName}}</td>
-            <td>{{this.email}}</td>
-            <td>{{this.phoneNum}}</td>
+            <td>{{checkNull this.email}}</td>
+            <td>{{checkNull this.phoneNum}}</td>
         </tr>
         {{/each}}
     </tbody>

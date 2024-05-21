@@ -14,16 +14,27 @@ PORT = 35117
 // database
 var db = require('./database/db-connector')
 
+const moment = require('moment')
+
 // handlebars
 const { engine } = require('express-handlebars')
 var exphbs = require('express-handlebars')
 app.engine('.hbs', engine({extname: ".hbs",
 	helpers: {
 		dateFormat: function (date) {
-			return moment(date).format('YYYY-MM-DD')
+			return moment(date).format('MM-DD-YYYY');
+		},
+		/* Citation for the following helper:
+			Date: 5/21/2024
+			Adapted from:
+			https://stackoverflow.com/questions/33350200/can-handlebars-set-a-javascript-variable-to-null
+		*/
+		checkNull: function (value) {
+			return value === null ? "NULL" : value
 		}
 	}
 }))
+
 app.set('view engine', '.hbs')
 
 

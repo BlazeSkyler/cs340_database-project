@@ -16,8 +16,8 @@ CREATE OR REPLACE TABLE Customers (
 -- Workers Table
 CREATE OR REPLACE TABLE Workers (
     workerID int NOT NULL AUTO_INCREMENT,
-    firstName varchar(20) not null,
-    lastName varchar(20) not null,
+    firstName varchar(20) NOT NULL,
+    lastName varchar(20) NOT NULL,
     email varchar(45),
     phoneNum varchar(20),
     PRIMARY KEY (workerID)
@@ -41,7 +41,7 @@ CREATE OR REPLACE TABLE Cupcakes (
     cupcakeID int NOT NULL AUTO_INCREMENT,
     cakeFlavor varchar(25) NOT NULL,
     cakeColor varchar(20),
-    frostingFlavor varchar(25),
+    frostingFlavor varchar(25), NOT NULL,
     frostingColor varchar(20),
     price decimal(19,2) NOT NULL,
     PRIMARY KEY (cupcakeID)
@@ -49,7 +49,7 @@ CREATE OR REPLACE TABLE Cupcakes (
 
 -- CupcakesOrdered Table
 CREATE OR REPLACE TABLE CupcakesOrdered (
-    cupcakesOrderedID int AUTO_INCREMENT,
+    cupcakesOrderedID int NOT NULL AUTO_INCREMENT,
     orderID int NOT NULL,
     cupcakeID int NOT NULL,
     quantity int(5) NOT NULL,
