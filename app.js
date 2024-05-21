@@ -17,8 +17,15 @@ var db = require('./database/db-connector')
 // handlebars
 const { engine } = require('express-handlebars')
 var exphbs = require('express-handlebars')
-app.engine('.hbs', engine({extname: ".hbs"}))
+app.engine('.hbs', engine({extname: ".hbs",
+	helpers: {
+		dateFormat: function (date) {
+			return moment(date).format('YYYY-MM-DD')
+		}
+	}
+}))
 app.set('view engine', '.hbs')
+
 
 // JSON and form data
 app.use(express.json())

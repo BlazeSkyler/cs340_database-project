@@ -70,7 +70,7 @@ VALUES ('Kevin', 'Juanda', 'jkevin@hello.com', '521-759-318'),
 ('Skyler', 'Ucol', 'uskyler@hello.com', '531-872-375'),
 ('Jenny', 'Kim', 'kjenny@hello.com', '543-982-736');
 
-INSERT INTO Cupcakes (cakeFlavor, cakeColor, frostingFlavor, frostingColor, price, numSold, numMade)
+INSERT INTO Cupcakes (cakeFlavor, cakeColor, frostingFlavor, frostingColor, price)
 VALUES ('Vanilla', 'White', 'Strawberry', 'Red', 5),
 ('Mint Oreo', 'Black', 'Peanut Butter', 'Brown', 10),
 ('Mocha', 'Brown', 'Red Velvet', 'Red', 15),
