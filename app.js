@@ -147,16 +147,47 @@ app.post('/add-cupcakesordered-ajax', function(req, res)
 app.delete('/delete-cupcakesordered-ajax', function(req, res, next)
 {
 	let data = req.body
-	let cupcakesOrderedID = parseInt(data.cupcakesOrderedID)
-	let deleteCupcakesOrdered = "DELETE FROM CupcakesOrdered WHERE cupcakesOrderedID = ?"
+	let cupcakesOrderedID = parseInt(data.id)
+	let delete_CupcakesOrdered = "DELETE FROM CupcakesOrdered WHERE cupcakesOrderedID = ?"
 
-	db.pool.query(deleteCupcakesOrdered, [cupcakesOrderedID], function(error, rows, fields) {
+	db.pool.query(delete_CupcakesOrdered, [cupcakesOrderedID], function(error, rows, fields) {
 		if (error) {
 			console.log(error)
 			res.sendStatus(400)
 		}
 		else {
 			res.sendStatus(204)
+		}
+	})
+})
+
+app.put('/put-cupcakesordered-ajax', function(req, res, next) {
+	let data = req.body
+
+	let orderID = parseInt(data.orderID)
+	let cupcakeID = parseInt(data.cupcakeID)
+	let quantity = parseInt(data.quantity)
+
+	let queryUpdateQuantity = "UPDATE CupcakesOrdered SET quantity = ? WHERE orderID = ? AND cupcakeID = ?"
+	let selectCupcakesOrdered = "SELECT * FROM CupcakesOrdered WHERE orderID = ? AND cupcakeID = ?"
+
+	// run first query
+	db.pool.query(queryUpdateQuantity, [quantity, orderID, cupcakeID], function(error, rows, fields) {
+		if (error) {
+			console.log(error)
+			res.sendStatus(400)
+		}
+		// run second query
+		else {
+			db.pool.query(selectCupcakesOrdered, [quantity, orderID, cupcakeID], function(error, rows, fields) {
+				if (error) {
+					console.log(error)
+					res.sendStatus(400)
+				}
+				else {
+					res.send(rows)
+				}
+			})
 		}
 	})
 })

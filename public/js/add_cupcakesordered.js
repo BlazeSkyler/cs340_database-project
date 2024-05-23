@@ -11,9 +11,9 @@ addCupcakesOrderedForm.addEventListener("submit", function (e) {
 	// prevent form from submitting
 	e.preventDefault();
 
-	let inputOrderID = document.getElementById("orderID")
-	let inputCupcakeID = document.getElementById("cupcakeID")
-	let inputQuantity = document.getElementById("quantity")
+	let inputOrderID = document.getElementById("add-orderID")
+	let inputCupcakeID = document.getElementById("add-cupcakeID")
+	let inputQuantity = document.getElementById("add-quantity")
 
 	let orderIDVal = inputOrderID.value
 	let cupcakeIDVal = inputCupcakeID.value
@@ -63,7 +63,7 @@ addRowToTable = (data) => {
 
 	// create a row and cells
 	let row = document.createElement("tr")
-	let editCell = document.createElement("td")
+	// let editCell = document.createElement("td")
 	let delCell = document.createElement("td")
 	let cupcakesOrderedIDCell = document.createElement("td")
 	let orderIDCell = document.createElement("td")
@@ -71,8 +71,12 @@ addRowToTable = (data) => {
 	let quantityCell = document.createElement("td")
 
 	// edit and delete cells
-	editCell.innerHTML = "Edit"
-	delCell.innerHTML = `<a href="#" onclick="deleteCupcakesOrdered({{this.cupcakesOrderedID}})">Delete</a>`
+	// editCell.innerHTML = "Edit"
+
+	delCell.innerHTML = `<a href="javascript:void(0)">Delete</a>`
+	delCell.onclick = function() {
+		deleteCupcakesOrdered(newRow.cupcakesOrderedID)
+	}
 
 	// fill cells
 	cupcakesOrderedIDCell.innerText = newRow.cupcakesOrderedID
@@ -87,7 +91,7 @@ addRowToTable = (data) => {
 	quantityCell.style.textAlign = 'right'
 
 	// add cells to the row
-	row.appendChild(editCell)
+	// row.appendChild(editCell)
 	row.appendChild(delCell)
 	row.appendChild(cupcakesOrderedIDCell)
 	row.appendChild(orderIDCell)
