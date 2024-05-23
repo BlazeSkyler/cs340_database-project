@@ -14,12 +14,12 @@
         <tr>
             <td>Edit</td>
             <td>Delete</td>
-            <td>{{this.orderID}}</td>
-            <td>{{this.customerID}}</td>
-            <td>{{checkNull this.workerID}}</td>
-            <td>{{dateFormat this.datePlaced}}</td>
-            <td>{{checkNull (dateFormat this.datePickedup)}}</td>
-            <td>{{this.totalPrice}}</td>
+            <td align="center">{{this.orderID}}</td>
+            <td align="center">{{this.customerID}}</td>
+            <td align="center">{{checkNull this.workerID}}</td>
+            <td align="center">{{dateFormat this.datePlaced}}</td>
+            <td align="center">{{checkNull (dateFormat this.datePickedup)}}</td>
+            <td align="right">{{this.totalPrice}}</td>
         </tr>
         {{/each}}
     </tbody>

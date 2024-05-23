@@ -41,7 +41,7 @@ CREATE OR REPLACE TABLE Cupcakes (
     cupcakeID int NOT NULL AUTO_INCREMENT,
     cakeFlavor varchar(25) NOT NULL,
     cakeColor varchar(20),
-    frostingFlavor varchar(25), NOT NULL,
+    frostingFlavor varchar(25) NOT NULL,
     frostingColor varchar(20),
     price decimal(19,2) NOT NULL,
     PRIMARY KEY (cupcakeID)
