@@ -4,9 +4,9 @@
    https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main/Step%205%20-%20Adding%20New%20Data
 */
 
-let addCustomerForm = document.getElementById('add-customer-form-ajax')
+let addWorkerForm = document.getElementById('add-worker-form-ajax')
 
-addCustomerForm.addEventListener("submit", function (e) {
+addWorkerForm.addEventListener("submit", function (e) {
    e.preventDefault()
 
    let inputFirstName = document.getElementById("add-firstName")
@@ -27,7 +27,7 @@ addCustomerForm.addEventListener("submit", function (e) {
    }
 
    var xhttp = new XMLHttpRequest()
-   xhttp.open("POST", "/add-customer-ajax", true)
+   xhttp.open("POST", "/add-worker-ajax", true)
    xhttp.setRequestHeader("Content-type", "application/json")
 
    xhttp.onreadystatechange = () => {
@@ -47,7 +47,7 @@ addCustomerForm.addEventListener("submit", function (e) {
 })
 
 addRowToTable = (data) => {
-   let currentTable = document.getElementById("customers-table")
+   let currentTable = document.getElementById("workers-table")
 
    let newRowIndex = currentTable.rows.length
 
@@ -57,7 +57,7 @@ addRowToTable = (data) => {
    let row = document.createElement("tr")
    // let editCell = document.createElement("td")
    let delCell = document.createElement("td")
-   let customerIDCell = document.createElement("td")
+   let workerIDCell = document.createElement("td")
    let firstNameCell = document.createElement("td")
    let lastNameCell = document.createElement("td")
    let emailCell = document.createElement("td")
@@ -67,22 +67,22 @@ addRowToTable = (data) => {
    delCellButton.id = "delete-button"
    delCellButton.innerHTML = "Delete"
    // delCellButton.onclick = function() {
-   //    deleteCustomer(newRow.customerID)
+   //    deleteWorker(newRow.workerID)
    // }
    delCell.appendChild(delCellButton)
 
-   customerIDCell.innerText = newRow.customerID
+   workerIDCell.innerText = newRow.workerID
    firstNameCell.innerText = newRow.firstName
    lastNameCell.innerText = newRow.lastName
    emailCell.innerText = newRow.email
    phoneNumCell.innerText = newRow.phoneNum
 
-   customerIDCell.style.textAlign = "center"
+   workerIDCell.style.textAlign = "center"
    phoneNumCell.style.textAlign = "center"
 
    // row.appendChild(editCell)
    row.appendChild(delCell)
-   row.appendChild(customerIDCell)
+   row.appendChild(workerIDCell)
    row.appendChild(firstNameCell)
    row.appendChild(lastNameCell)
    row.appendChild(emailCell)

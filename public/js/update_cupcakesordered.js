@@ -10,23 +10,24 @@ updateCupcakesOrderedForm.addEventListener("submit", function (e) {
 	// prevent from submitting
 	e.preventDefault()
 
-	// get form fields
-	let inputOrderID = document.getElementById("update-orderID")
-	let inputCupcakeID = document.getElementById("update-cupcakeID")
+	// get form fields\
+	let chosenID = document.getElementById("update-cupcakesOrderedID")
 	let inputQuantity = document.getElementById("update-quantity")
 
-	let orderIDValue = inputOrderID.value
-	let cupcakeIDValue = inputCupcakeID .value
+	let chosenIDValue = chosenID.value
 	let quantityValue = inputQuantity.value
 
+	// check for selection
+	// if (chosenIDValue == ''){
+	// 	return
+	// }
 	// check for 0 in quantity
 	if (isNaN(quantityValue) || quantityValue < 1) {
 		return
 	}
 
 	let data = {
-		orderID: orderIDValue,
-		cupcakeID: cupcakeIDValue,
+		cupcakesOrderedID: chosenIDValue,
 		quantity: quantityValue
 	}
 
@@ -39,7 +40,7 @@ updateCupcakesOrderedForm.addEventListener("submit", function (e) {
 	xhttp.onreadystatechange = () => {
 		if (xhttp.readyState == 4 && xhttp.status == 200) {
 			// update row in table
-			updateRow(xhttp.response, orderIDValue, cupcakeIDValue)
+			updateRow(xhttp.response, chosenIDValue)
 			location.reload()		// reload page *needed
 		}
 		else if (xhttp.readyState == 4 && xhttp.status != 200) {
@@ -51,21 +52,18 @@ updateCupcakesOrderedForm.addEventListener("submit", function (e) {
 })
 
 
-function updateRow(data, orderID, cupcakeID) {
+function updateRow(data, cupcakesOrderedID) {
 	let parsedData = JSON.parse(data)
 
 	let table = document.getElementById("cupcakesordered-table")
 
 	for (let i = 0, row; row = table.rows[i]; i++) {
 		// match orderID AND cupcakeID
-		if (table.rows[i].getAttribute("data-value") == orderID){
-			if (table.rows[i].getAttribute("data-value") == cupcakeID) {
-
-				// get location of quantity col in row to update
-				let updateRowIndex = table.getElementsByTagName("tr")[i]
-				let td = updateRowIndex.getElementsByTagName("td")[4]
-				td.innerHTML = parsedData[0].quantity
-			}
+		if (table.rows[i].getAttribute("data-value") == cupcakesOrderedID){
+			// get location of quantity col in row to update
+			let updateRowIndex = table.getElementsByTagName("tr")[i]
+			let td = updateRowIndex.getElementsByTagName("td")[4]
+			td.innerHTML = parsedData[0].quantity
 		}
 	}
 }

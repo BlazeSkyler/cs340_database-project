@@ -1,43 +1,44 @@
-{{!-- insert --}}
-{{!-- <div id="insert" display:> --}}
+{{!-- insert customer --}}
+<div id="insert">
     <h3>Add new customer</h3>
     <form id="add-customer-form-ajax">
         <fieldset>
-            <label for="firstName">First Name</label> <input type="text" name="firstName" id="firstName">
-            <label for="lastName">Last Name</label> <input type="text" name="lastName" id="lastName">
-            <label for="email">Email</label> <input type="text" name="email" id="email">
-            <label for="phoneNum">Phone #</label> <input type="text" name="phoneNum" id="phoneNum">
+            <label for="add-firstName">First Name</label> <input type="text" name="add-firstName" id="add-firstName" required>
+            <label for="add-lastName">Last Name</label> <input type="text" name="add-lastName" id="add-lastName" required>
+            <label for="add-email">Email</label> <input type="text" name="add-email" id="add-email">
+            <label for="add-phoneNum">Phone #</label> <input type="text" name="add-phoneNum" id="add-phoneNum">
         </fieldset>
-        <input type="submit" id="add-customer-submit" value="Add Customer">
-        <input type="button" class="cancel" value="Cancel">
+        <input type="submit" value="Add Customer">
+        <input type="reset" class="cancel" value="Cancel">
     </form>
-{{!-- </div> --}}
+</div>
+
 <script src="./js/add_customer.js"></script>
 
-{{!-- display tables --}}
-<h3>View customers</h3>
-<table>
-    <thead>
-        <tr>
-            <th>Add</th> 
-            <th></th>
-            {{#each data.[0]}}   
-            <th>{{@key}}</th>
-            {{/each}}
-        </tr>
-    </thead>
+{{!-- display table --}}
+<div id="display">
+    <h3>View customers</h3>
+    <table id="customers-table">
+        <thead>
+            <tr>
+                <th><button id="new-button">Add</button></th> 
+                {{#each data.[0]}}   
+                <th>{{@key}}</th>
+                {{/each}}
+            </tr>
+        </thead>
 
-    <tbody>
-        {{#each data}}
-        <tr>
-            <td>Edit</td>
-            <td>Delete</td>
-            <td align="center">{{this.customerID}}</td>
-            <td>{{this.firstName}}</td>
-            <td>{{this.lastName}}</td>
-            <td>{{checkNull this.email}}</td>
-            <td>{{checkNull this.phoneNum}}</td>
-        </tr>
-        {{/each}}
-    </tbody>
-</table>
+        <tbody>
+            {{#each data}}
+            <tr>
+                <td><button id="delete-button">Delete</button></td>
+                <td align="center">{{this.customerID}}</td>
+                <td>{{this.firstName}}</td>
+                <td>{{this.lastName}}</td>
+                <td>{{checkNull this.email}}</td>
+                <td align="center">{{checkNull this.phoneNum}}</td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+</div>

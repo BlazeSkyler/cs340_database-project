@@ -1,26 +1,46 @@
-<table>
-    <thead>
-        <tr>
-            <th>Add</th> 
-            <th></th>
-            {{#each data.[0]}}
-            <th>{{@key}}</th>
-            {{/each}}
-        </tr>
-    </thead>
+<!-- insert new cupcake form -->
+<div id="insert">
+    <h3>Add new cupcake</h3>
+    <form id="add-cupcake-form-ajax">
+        <fieldset>
+            <label for="add-cakeFlavor">Cake Flavor</label> <input type="text" name="add-cakeFlavor" id="add-cakeFlavor" required>
+            <label for="add-cakeColor">Cake Color</label> <input type="text" name="add-cakeColor" id="add-cakeColor">
+            <label for="add-frostingFlavor">Frosting Flavor</label> <input type="text" name="add-frostingFlavor" id="add-frostingFlavor" required>
+            <label for="add-frostingColor">Frosting Color</label> <input type="text" name="add-frostingColor" id="add-frostingColor">
+            <label for="add-price">Price</label> <input type="number" min="0" step=".01" name="add-price" id="add-price" required>
+        </fieldset>
+        <input type="submit" value="Add Cupcake">
+        <input type="reset" class="cancel" value="Cancel">
+    </form>
+</div>
 
-    <tbody>
-        {{#each data}}
-        <tr>
-            <td>Edit</td>
-            <td>Delete</td>
-            <td align="center">{{this.cupcakeID}}</td>
-            <td>{{this.cakeFlavor}}</td>
-            <td>{{checkNull this.cakeColor}}</td>
-            <td>{{this.frostingFlavor}}</td>
-            <td>{{checkNull this.frostingColor}}</td>
-            <td align="right">{{this.price}}</td>
-        </tr>
-        {{/each}}
-    </tbody>
-</table>
+<script src="./js/add_cupcake.js"></script>
+
+{{!-- display table --}}
+<div id="display">
+    <h3>View cupcakes</h3>
+    <table id="cupcakes-table">
+        <thead>
+            <tr>
+                <th><button id="new-button">Add</button></th> 
+                {{#each data.[0]}}
+                <th>{{@key}}</th>
+                {{/each}}
+            </tr>
+        </thead>
+
+        <tbody>
+            {{#each data}}
+            <tr>
+                <td><button id="delete-button">Delete</button></td>
+                <td align="center">{{this.cupcakeID}}</td>
+                <td>{{this.cakeFlavor}}</td>
+                <td>{{checkNull this.cakeColor}}</td>
+                <td>{{this.frostingFlavor}}</td>
+                <td>{{checkNull this.frostingColor}}</td>
+                <td align="right">{{this.price}}</td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+</div>

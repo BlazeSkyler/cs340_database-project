@@ -22,7 +22,7 @@ var exphbs = require('express-handlebars')
 app.engine('.hbs', engine({extname: ".hbs",
 	helpers: {
 		dateFormat: function (date) {
-			return moment(date).format('MM-DD-YYYY');
+			return moment(date).format('MM-DD-YYYY');	
 		},
 		/* Citation for the following helper:
 			Date: 5/21/2024
@@ -82,10 +82,21 @@ app.get('/cupcakes', function(req, res)
 app.get('/orders', function(req, res)
 	{
 		let query1 = "SELECT * FROM Orders;"
+		let query2 = "SELECT * FROM Customers;"
+		let query3 = "SELECT * FROM Workers"
 		db.pool.query(query1, function(error,rows,fileds){
-			res.render('orders', {
-				title: "Orders",
-				data: rows
+			let orders = rows
+
+			db.pool.query(query2, (error, rows, fields) => {
+				let customers = rows
+
+				db.pool.query(query3, (error, rows, fields) => {
+					let workers = rows
+					res.render('orders', {
+					title: "Orders",
+					data: orders, customers: customers, workers: workers
+				})
+			})
 			})
 		})	
 	})
@@ -109,8 +120,155 @@ app.get('/cupcakesordered', function(req, res)
 					data: cupcakesordered, orders: orders, cupcakes: cupcakes
 				})
 			})
-		})
-	})	
+			})
+		})	
+	})
+
+
+app.post('/add-customer-ajax', function(req, res)
+{
+	let data = req.body
+
+	let email = data.email
+	let phoneNum = data.phoneNum
+
+	// set NULLs
+	if (email == ''){
+		email = 'NULL'
+	}
+	if (phoneNum == ''){
+		phoneNum = 'NULL'
+	}
+
+	query1 = `INSERT INTO Customers (firstName, lastName, email, phoneNum)
+	VALUES ('${data.firstName}', '${data.lastName}', '${email}', '${phoneNum}')`
+	db.pool.query(query1, function(error, rows, fields) {
+		if (error) {
+			console.log(error)
+			res.sendStatus(400)
+		}
+		else {
+			query2 = "SELECT * FROM Customers;"
+			db.pool.query(query2, function(error, rows, fields) {
+				if (error) {
+					console.log(error)
+					res.sendStatus(400)
+				}
+				else {
+					res.send(rows)
+				}
+			})
+		}
+	})
+})
+
+app.post('/add-worker-ajax', function(req, res)
+{
+	let data = req.body
+
+	let email = data.email
+	let phoneNum = data.phoneNum
+
+	// set NULLs
+	if (email == ''){
+		email = 'NULL'
+	}
+	if (phoneNum == ''){
+		phoneNum = 'NULL'
+	}
+
+	query1 = `INSERT INTO Workers (firstName, lastName, email, phoneNum)
+	VALUES ('${data.firstName}', '${data.lastName}', '${email}', '${phoneNum}')`
+	db.pool.query(query1, function(error, rows, fields) {
+		if (error) {
+			console.log(error)
+			res.sendStatus(400)
+		}
+		else {
+			query2 = "SELECT * FROM Workers;"
+			db.pool.query(query2, function(error, rows, fields) {
+				if (error) {
+					console.log(error)
+					res.sendStatus(400)
+				}
+				else {
+					res.send(rows)
+				}
+			})
+		}
+	})
+})
+
+app.post('/add-cupcake-ajax', function(req, res)
+{
+	let data = req.body
+
+	let cakeColor = data.cakeColor
+	let frostingColor = data.frostingColor
+
+	if (cakeColor == ''){
+		cakeColor = 'NULL'
+	}
+	if (frostingColor == ''){
+		frostingColor = 'NULL'
+	}
+
+	query1 = `INSERT INTO Cupcakes (cakeFlavor, cakeColor, frostingFlavor, frostingColor, price)
+	VALUES ('${data.cakeFlavor}', '${cakeColor}', '${data.frostingFlavor}', '${frostingColor}', ${data.price})`
+	db.pool.query(query1, function(error, rows, fields) {
+		if (error) {
+			console.log(error)
+			res.sendStatus(400)
+		}
+		else {
+			query2 = "SELECT * FROM Cupcakes;"
+			db.pool.query(query2, function(error, rows, fields) {
+				if (error) {
+					console.log(error)
+					res.sendStatus(400)
+				}
+				else {
+					res.send(rows)
+				}
+			})
+		}
+	})
+})
+
+app.post('/add-order-ajax', function(req, res)
+{
+	let data = req.body
+
+	let workerID = parseInt(data.workerID)
+	let datePickedup = data.datePickedup
+
+	if (isNaN(workerID)){
+		workerID = 'NULL'
+	}
+	if (datePickedup == ''){
+		datePickedup = 'NULL'
+	}
+
+	query1 = `INSERT INTO Orders (customerID, workerID, datePlaced, datePickedup, totalPrice)
+	VALUES (${data.customerID}, ${workerID}, '${data.datePlaced}', '${datePickedup}', ${data.totalPrice})`
+	db.pool.query(query1, function(error, rows, fields) {
+		if (error) {
+			console.log(error)
+			res.sendStatus(400)
+		}
+		else {
+			query2 = "SELECT * FROM Orders;"
+			db.pool.query(query2, function(error, rows, fields) {
+				if (error) {
+					console.log(error)
+					res.sendStatus(400)
+				}
+				else {
+					res.send(rows)
+				}
+			})
+		}
+	})
 })
 
 app.post('/add-cupcakesordered-ajax', function(req, res)
@@ -120,7 +278,7 @@ app.post('/add-cupcakesordered-ajax', function(req, res)
 	// query to run on database
 	query1 = `INSERT INTO CupcakesOrdered (orderID, cupcakeID, quantity)
 	VALUES (${data.orderID}, ${data.cupcakeID}, ${data.quantity})`
-	db.pool.query(query1, function(error, rows, fields){
+	db.pool.query(query1, function(error, rows, fields) {
 
 		// check for error
 		if (error) {
@@ -161,33 +319,24 @@ app.delete('/delete-cupcakesordered-ajax', function(req, res, next)
 	})
 })
 
-app.put('/put-cupcakesordered-ajax', function(req, res, next) {
+app.put('/put-cupcakesordered-ajax', function(req, res, next)
+{
 	let data = req.body
 
-	let orderID = parseInt(data.orderID)
-	let cupcakeID = parseInt(data.cupcakeID)
+	let cupcakesOrderedID = parseInt(data.cupcakesOrderedID)
 	let quantity = parseInt(data.quantity)
 
-	let queryUpdateQuantity = "UPDATE CupcakesOrdered SET quantity = ? WHERE orderID = ? AND cupcakeID = ?"
-	let selectCupcakesOrdered = "SELECT * FROM CupcakesOrdered WHERE orderID = ? AND cupcakeID = ?"
+	let queryUpdateQuantity = "UPDATE CupcakesOrdered SET quantity = ? WHERE cupcakesOrderedID = ?"
 
 	// run first query
-	db.pool.query(queryUpdateQuantity, [quantity, orderID, cupcakeID], function(error, rows, fields) {
+	db.pool.query(queryUpdateQuantity, [quantity, cupcakesOrderedID], function(error, rows, fields) {
 		if (error) {
 			console.log(error)
 			res.sendStatus(400)
 		}
 		// run second query
 		else {
-			db.pool.query(selectCupcakesOrdered, [quantity, orderID, cupcakeID], function(error, rows, fields) {
-				if (error) {
-					console.log(error)
-					res.sendStatus(400)
-				}
-				else {
-					res.send(rows)
-				}
-			})
+			res.send(rows)
 		}
 	})
 })

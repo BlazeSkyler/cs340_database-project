@@ -9,3 +9,24 @@ table, th, td {
 th, td {
     padding: 5px;
 }
+
+#new-button {
+    border-radius: 4px;
+    width: 100%;
+    background-color: lightgreen;
+    color: black;
+    border: 2px solid;
+}
+
+#delete-button {
+    border-radius: 4px;
+    width: 100%;
+    background-color: #FFCCCB;
+    color: black;
+    border: 2px solid;
+}
+
+#new-button:hover, #delete-button:hover {
+    background-color: darkgray;
+    color: white;
+}

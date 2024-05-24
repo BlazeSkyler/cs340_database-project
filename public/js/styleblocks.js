@@ -22,16 +22,13 @@ function domLoaded() {
 function showform(selected) {
     const insert = document.getElementById("insert");
     const view = document.getElementById("display");
-    const edit = document.getElementById("edit");
 
     if (selected == "insert") {
         insert.style.display = "block";
         view.style.display = "block";
-        edit.style.display = "block";
     }
     else {
         insert.style.display = "none";
         view.style.display = "block";
-        edit.style.display = "block";
     }
 }

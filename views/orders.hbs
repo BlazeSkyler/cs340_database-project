@@ -1,26 +1,66 @@
-<table>
-    <thead>
-        <tr>
-            <th>Add</th> 
-            <th></th>
-            {{#each data.[0]}}
-            <th>{{@key}}</th>
-            {{/each}}
-        </tr>
-    </thead>
+{{!-- insert --}}
+<div id="insert">
+    <h3>Add new order</h3>
+    <form id="add-order-form-ajax">
+        <fieldset>
+            <label for="add-customerID">Customer ID</label> <select name="add-customerID" id="add-customerID" required>
+                <option value="">&nbsp;</option>
+                {{#each customers}}
+                <option value="{{this.customerID}}">{{this.customerID}}</option>
+                {{/each}}
+            </select>
+            <label for="add-workerID">Worker ID</label> <select name="add-workerID" id="add-workerID">
+                <option value="">None</option>
+                {{#each workers}}
+                <option value="{{this.workerID}}">{{this.workerID}}</option>
+                {{/each}}
+            </select>
+            <label for="add-datePlaced">Date Placed</label> <input type="date" name="add-datePlaced" id="add-datePlaced" required>
+            <label for="add-datePickedup">Date Pickedup</label> <input type="date" name="add-datePickedup" id="add-datePickedup" value="">
+            <label for="add-totalPrice">Total Price</label> <input type="number" min="0" step=".01" name="add-totalPrice" id="add-totalPrice" required>
+        </fieldset>
+        {{!-- <fieldset id="cupcakesOrdered-add-form">
+            <label for="cupcakeID">Cupcake ID</label> <select name="cupcakeID" id="cupcakeID">
+                <option value="0">&nbsp;</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+            </select>
+            <label for="quantity">Quantity</label> <input type="number" name="quantity" id="quantity"><br>
+        </fieldset> --}}
+        {{!-- <p><input type="button" id="add-new-cupcakesordered" value="Add New"></p> --}}
+        <input type="submit" value="Add Order">
+        <input type="reset" class="cancel" value="Cancel">
+    </form>
+</div>
 
-    <tbody>
-        {{#each data}}
-        <tr>
-            <td>Edit</td>
-            <td>Delete</td>
-            <td align="center">{{this.orderID}}</td>
-            <td align="center">{{this.customerID}}</td>
-            <td align="center">{{checkNull this.workerID}}</td>
-            <td align="center">{{dateFormat this.datePlaced}}</td>
-            <td align="center">{{checkNull (dateFormat this.datePickedup)}}</td>
-            <td align="right">{{this.totalPrice}}</td>
-        </tr>
-        {{/each}}
-    </tbody>
-</table>
+<script src="./js/add_order.js"></script>
+
+{{!-- display orders --}}
+<div id="display">
+    <h3>View orders</h3>
+    <table id="orders-table">
+        <thead>
+            <tr>
+                <th><button id="new-button">Add</button></th> 
+                {{#each data.[0]}}
+                <th>{{@key}}</th>
+                {{/each}}
+            </tr>
+        </thead>
+
+        <tbody>
+            {{#each data}}
+            <tr>
+                <td><button id="delete-button">Delete</button></td>
+                <td align="center">{{this.orderID}}</td>
+                <td align="center">{{this.customerID}}</td>
+                <td align="center">{{checkNull this.workerID}}</td>
+                <td align="center">{{dateFormat this.datePlaced}}</td>
+                <td align="center">{{checkNull (dateFormat this.datePickedup)}}</td>
+                <td align="right">{{this.totalPrice}}</td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+</div>

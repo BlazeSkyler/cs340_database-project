@@ -44,9 +44,7 @@ addCupcakesOrderedForm.addEventListener("submit", function (e) {
 		else if (xhttp.readyState == 4 && xhttp.status != 200) {
 			console.log("There was an error with the input")
 		}
-		
 	}
-
 	// send request and wait for response
 	xhttp.send(JSON.stringify(data))
 })
@@ -73,10 +71,13 @@ addRowToTable = (data) => {
 	// edit and delete cells
 	// editCell.innerHTML = "Edit"
 
-	delCell.innerHTML = `<a href="javascript:void(0)">Delete</a>`
-	delCell.onclick = function() {
+	delCellButton = document.createElement("button")
+	delCellButton.id = "delete-button"
+	delCellButton.innerHTML = "Delete"
+	delCellButton.onclick = function() {
 		deleteCupcakesOrdered(newRow.cupcakesOrderedID)
 	}
+	delCell.appendChild(delCellButton)
 
 	// fill cells
 	cupcakesOrderedIDCell.innerText = newRow.cupcakesOrderedID
@@ -100,4 +101,11 @@ addRowToTable = (data) => {
 
 	// add row to table
 	currentTable.appendChild(row)
+
+	// add to edit drop down list
+   let selectMenu = document.getElementById("update-cupcakesOrderedID")
+   let option = document.createElement("option")
+   option.text = newRow.cupcakesOrderedID
+   option.value = newRow.cupcakesOrderedID
+   selectMenu.add(option)
 }

@@ -80,7 +80,7 @@ INSERT INTO Orders (customerID, workerID, datePlaced, datePickedup, totalPrice)
 VALUES ((SELECT customerID FROM Customers WHERE firstName = 'Brenda' AND lastName = 'Gates'), 
 (SELECT workerID FROM Workers WHERE firstName = 'Skyler' AND lastName = 'Ucol'), '2024-01-30', '2024-02-07', 50),
 ((SELECT customerID FROM Customers WHERE firstName = 'Steven' AND lastName = 'Lee'), 
-(SELECT workerID FROM Workers WHERE firstName = 'Kevin' AND lastName = 'Juanda'), '2023-12-04', '2021-12-11', 35),
+(SELECT workerID FROM Workers WHERE firstName = 'Kevin' AND lastName = 'Juanda'), '2023-12-04', NULL, 35),
 ((SELECT customerID FROM Customers WHERE firstName = 'John' AND lastName = 'Smith'), NULL, '2023-12-20', '2023-12-27', 45);
 
 INSERT INTO CupcakesOrdered (orderID, cupcakeID, quantity)
