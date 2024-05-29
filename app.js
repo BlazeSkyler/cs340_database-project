@@ -31,6 +31,9 @@ app.engine('.hbs', engine({extname: ".hbs",
 		*/
 		checkNull: function (value) {
 			return value === null ? "NULL" : value
+		},
+		displayPrice: function (price) {
+			return price.toFixed(2)
 		}
 	}
 }))

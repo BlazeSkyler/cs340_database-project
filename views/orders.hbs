@@ -58,7 +58,7 @@
                 <td align="center">{{checkNull this.workerID}}</td>
                 <td align="center">{{dateFormat this.datePlaced}}</td>
                 <td align="center">{{checkNull (dateFormat this.datePickedup)}}</td>
-                <td align="right">{{this.totalPrice}}</td>
+                <td align="right">{{displayPrice this.totalPrice}}</td>
             </tr>
             {{/each}}
         </tbody>

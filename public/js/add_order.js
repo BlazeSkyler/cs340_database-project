@@ -7,8 +7,10 @@
 let addOrderForm = document.getElementById('add-order-form-ajax')
 
 addOrderForm.addEventListener("submit", function (e) {
+   // prevent from submitting
    e.preventDefault()
 
+   // get elements and values
    let inputCustomerID = document.getElementById("add-customerID")
    let inputWorkerID = document.getElementById("add-workerID")
    let inputDatePlaced = document.getElementById("add-datePlaced")
@@ -21,6 +23,7 @@ addOrderForm.addEventListener("submit", function (e) {
    let datePickedupVal = inputDatePickedup.value
    let totalPriceVal = inputTotalPrice.value
 
+   // set values to data
    let data = {
       customerID: customerIDVal,
       workerID: workerIDVal,
@@ -29,6 +32,7 @@ addOrderForm.addEventListener("submit", function (e) {
       totalPrice: totalPriceVal
    }
 
+   // setup AJAX request
    var xhttp = new XMLHttpRequest()
    xhttp.open("POST", "/add-order-ajax", true)
    xhttp.setRequestHeader("Content-type", "application/json")
@@ -37,6 +41,7 @@ addOrderForm.addEventListener("submit", function (e) {
       if (xhttp.readyState == 4 && xhttp.status == 200) {
          addRowToTable(xhttp.response)
 
+         // clear input fields
          inputCustomerID.value = ''
          inputWorkerID.value = ''
          inputDatePlaced.value = ''
@@ -47,16 +52,20 @@ addOrderForm.addEventListener("submit", function (e) {
          console.log("There was an error with the input")
       }
    }
+   // send request and wait for response
    xhttp.send(JSON.stringify(data))
 })
 
 addRowToTable = (data) => {
+   // get location for new row
    let currentTable = document.getElementById("orders-table")
    let newRowIndex = currentTable.rows.length
 
+   // get reference to object
    let parsedData = JSON.parse(data)
    let newRow = parsedData[parsedData.length - 1]
 
+   // create row with cells
    let row = document.createElement("tr")
    // let editCell = document.createElement("td")
    let delCell = document.createElement("td")
@@ -67,6 +76,7 @@ addRowToTable = (data) => {
    let datePickedupCell = document.createElement("td")
    let totalPriceCell = document.createElement("td")
 
+   // create delete button
    delCellButton = document.createElement("button")
    delCellButton.id = "delete-button"
    delCellButton.innerHTML = "Delete"
@@ -75,6 +85,7 @@ addRowToTable = (data) => {
    // }
    delCell.appendChild(delCellButton)
 
+   // fill cells
    orderIDCell.innerText = newRow.orderID
    customerIDCell.innerText = newRow.customerID
    workerIDCell.innerText = newRow.workerID
@@ -82,6 +93,7 @@ addRowToTable = (data) => {
    datePickedupCell.innerText = newRow.datePickedup
    totalPriceCell.innerText = newRow.totalPrice
 
+   // styles
    orderIDCell.style.textAlign = "center"
    customerIDCell.style.textAlign = "center"
    workerIDCell.style.textAlign = "center"
@@ -89,6 +101,7 @@ addRowToTable = (data) => {
    datePickedupCell.style.textAlign = "center"
    totalPriceCell.style.textAlign = "right"
 
+   // add cells to row
    // row.appendChild(editCell)
    row.appendChild(delCell)
    row.appendChild(orderIDCell)
@@ -98,5 +111,6 @@ addRowToTable = (data) => {
    row.appendChild(datePickedupCell)
    row.appendChild(totalPriceCell)
 
+   // add row to table
    currentTable.appendChild(row)
 }

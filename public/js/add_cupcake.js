@@ -7,8 +7,10 @@
 let addCupcakeForm = document.getElementById('add-cupcake-form-ajax')
 
 addCupcakeForm.addEventListener("submit", function (e) {
+   // prevent from submitting
    e.preventDefault()
 
+   // get input values
    let inputCakeFlavor = document.getElementById("add-cakeFlavor")
    let inputCakeColor = document.getElementById("add-cakeColor")
    let inputFrostingFlavor = document.getElementById("add-frostingFlavor")
@@ -21,6 +23,7 @@ addCupcakeForm.addEventListener("submit", function (e) {
    let frostingColorVal = inputFrostingColor.value
    let priceVal = inputPrice.value
 
+   // set values in data
    let data = {
       cakeFlavor: cakeFlavorVal,
       cakeColor: cakeColorVal,
@@ -29,6 +32,7 @@ addCupcakeForm.addEventListener("submit", function (e) {
       price: priceVal
    }
 
+   // setup AJAX request
    var xhttp = new XMLHttpRequest()
    xhttp.open("POST", "/add-cupcake-ajax", true)
    xhttp.setRequestHeader("Content-type", "application/json")
@@ -38,6 +42,7 @@ addCupcakeForm.addEventListener("submit", function (e) {
          // add new data to table
          addRowToTable(xhttp.response)
 
+         // clear inputs
          inputCakeFlavor.value = ''
          inputCakeColor.value = ''
          inputFrostingFlavor.value = ''
@@ -53,12 +58,15 @@ addCupcakeForm.addEventListener("submit", function (e) {
 })
 
 addRowToTable = (data) => {
+   // get location of new row
    let currentTable = document.getElementById("cupcakes-table")
    let newRowIndex = currentTable.rows.length
 
+   // get reference of object
    let parsedData = JSON.parse(data)
    let newRow = parsedData[parsedData.length - 1]
 
+   // create rows and cells
    let row = document.createElement("tr")
    // let editCell = document.createElement("td")
    let delCell = document.createElement("td")
@@ -71,6 +79,7 @@ addRowToTable = (data) => {
 
    // editCell.innerHTML = "Edit"
 
+   // create delete button
    delCellButton = document.createElement("button")
    delCellButton.id = "delete-button"
    delCellButton.innerHTML = "Delete"
@@ -79,6 +88,7 @@ addRowToTable = (data) => {
    // }
    delCell.appendChild(delCellButton)
 
+   // fill cells
    cupcakeIDCell.innerText = newRow.cupcakeID
    cakeFlavorCell.innerText = newRow.cakeFlavor
    cakeColorCell.innerText = newRow.cakeColor
@@ -86,9 +96,11 @@ addRowToTable = (data) => {
    frostingColorCell.innerText = newRow.frostingColor
    priceCell.innerText = newRow.price
 
+   // styles
    cupcakeIDCell.style.textAlign = 'center'
    priceCell.style.textAlign = 'right'
 
+   // add cells to row
    // row.appendChild(editCell)
    row.appendChild(delCell)
    row.appendChild(cupcakeIDCell)
@@ -98,5 +110,6 @@ addRowToTable = (data) => {
    row.appendChild(frostingColorCell)
    row.appendChild(priceCell)
 
+   // add row to table
    currentTable.appendChild(row)
 }

@@ -7,8 +7,10 @@
 let addCustomerForm = document.getElementById('add-customer-form-ajax')
 
 addCustomerForm.addEventListener("submit", function (e) {
+   // prevent from submitting
    e.preventDefault()
 
+   // get inputs values
    let inputFirstName = document.getElementById("add-firstName")
    let inputLastName = document.getElementById("add-lastName")
    let inputEmail = document.getElementById("add-email")
@@ -19,6 +21,7 @@ addCustomerForm.addEventListener("submit", function (e) {
    let emailVal = inputEmail.value
    let phoneNumVal = inputPhoneNum.value
 
+   // set values in data
    let data = {
       firstName: firstNameVal,
       lastName: lastNameVal,
@@ -26,6 +29,7 @@ addCustomerForm.addEventListener("submit", function (e) {
       phoneNum: phoneNumVal
    }
 
+   // setup AJAX request
    var xhttp = new XMLHttpRequest()
    xhttp.open("POST", "/add-customer-ajax", true)
    xhttp.setRequestHeader("Content-type", "application/json")
@@ -34,6 +38,7 @@ addCustomerForm.addEventListener("submit", function (e) {
       if (xhttp.readyState == 4 && xhttp.status == 200) {
          addRowToTable(xhttp.response)
 
+         // clear inputs
          inputFirstName.value = ''
          inputLastName.value = ''
          inputEmail.value = ''
@@ -43,17 +48,20 @@ addCustomerForm.addEventListener("submit", function (e) {
          console.log("There was an error with the input")
       }
    }
+   // send request and wait for response
    xhttp.send(JSON.stringify(data))
 })
 
 addRowToTable = (data) => {
+   // get location of new row
    let currentTable = document.getElementById("customers-table")
-
    let newRowIndex = currentTable.rows.length
 
+   // get reference to object
    let parsedData = JSON.parse(data)
    let newRow = parsedData[parsedData.length - 1]
 
+   // create row with cells
    let row = document.createElement("tr")
    // let editCell = document.createElement("td")
    let delCell = document.createElement("td")
@@ -63,6 +71,7 @@ addRowToTable = (data) => {
    let emailCell = document.createElement("td")
    let phoneNumCell = document.createElement("td")
 
+   // create delete button
    delCellButton = document.createElement("button")
    delCellButton.id = "delete-button"
    delCellButton.innerHTML = "Delete"
@@ -71,15 +80,18 @@ addRowToTable = (data) => {
    // }
    delCell.appendChild(delCellButton)
 
+   // fill cells
    customerIDCell.innerText = newRow.customerID
    firstNameCell.innerText = newRow.firstName
    lastNameCell.innerText = newRow.lastName
    emailCell.innerText = newRow.email
    phoneNumCell.innerText = newRow.phoneNum
 
+   // styles
    customerIDCell.style.textAlign = "center"
    phoneNumCell.style.textAlign = "center"
 
+   // add cells to row
    // row.appendChild(editCell)
    row.appendChild(delCell)
    row.appendChild(customerIDCell)
@@ -88,5 +100,6 @@ addRowToTable = (data) => {
    row.appendChild(emailCell)
    row.appendChild(phoneNumCell)
 
+   // add row to table
    currentTable.appendChild(row)
 }
