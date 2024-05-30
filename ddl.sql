@@ -40,8 +40,8 @@ CREATE OR REPLACE TABLE Orders (
 CREATE OR REPLACE TABLE Cupcakes (
     cupcakeID int NOT NULL AUTO_INCREMENT,
     cakeFlavor varchar(25) NOT NULL,
-    cakeColor varchar(20),
     frostingFlavor varchar(25) NOT NULL,
+    cakeColor varchar(20),
     frostingColor varchar(20),
     price decimal(19,2) NOT NULL,
     PRIMARY KEY (cupcakeID)
@@ -70,11 +70,11 @@ VALUES ('Kevin', 'Juanda', 'jkevin@hello.com', '521-759-318'),
 ('Skyler', 'Ucol', 'uskyler@hello.com', '531-872-375'),
 ('Jenny', 'Kim', 'kjenny@hello.com', '543-982-736');
 
-INSERT INTO Cupcakes (cakeFlavor, cakeColor, frostingFlavor, frostingColor, price)
-VALUES ('Vanilla', 'White', 'Strawberry', 'Red', 5),
-('Mint Oreo', 'Black', 'Peanut Butter', 'Brown', 10),
-('Mocha', 'Brown', 'Red Velvet', 'Red', 15),
-('Chocolate', NULL, 'Oreo', NULL, 25);
+INSERT INTO Cupcakes (cakeFlavor, frostingFlavor, cakeColor, frostingColor, price)
+VALUES ('Vanilla', 'Strawberry', 'White', 'Red', 5),
+('Mint Oreo', 'Peanut Butter', 'Black', 'Brown', 10),
+('Mocha', 'Red Velvet', 'Brown', 'Red', 15),
+('Chocolate', 'Oreo', NULL, NULL, 25);
 
 INSERT INTO Orders (customerID, workerID, datePlaced, datePickedup, totalPrice)
 VALUES ((SELECT customerID FROM Customers WHERE firstName = 'Brenda' AND lastName = 'Gates'), 

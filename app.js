@@ -22,7 +22,9 @@ var exphbs = require('express-handlebars')
 app.engine('.hbs', engine({extname: ".hbs",
 	helpers: {
 		dateFormat: function (date) {
-			return moment(date).format('MM-DD-YYYY');	
+			const dateValue = date ? moment(date).format('MM-DD-YYYY') : "NULL"
+			return dateValue
+			// return moment(date).format('MM-DD-YYYY')
 		},
 		/* Citation for the following helper:
 			Date: 5/21/2024
@@ -34,6 +36,9 @@ app.engine('.hbs', engine({extname: ".hbs",
 		},
 		displayPrice: function (price) {
 			return price.toFixed(2)
+		},
+		test: function (array, key, options) {
+			return array[key]
 		}
 	}
 }))
@@ -93,8 +98,35 @@ app.get('/orders', function(req, res)
 			db.pool.query(query2, (error, rows, fields) => {
 				let customers = rows
 
+				// display customer name instead of id
+				let customermap = {}
+				customers.map(customer => {
+					let id = parseInt(customer.customerID, 10)
+
+					customermap[id] = customer["firstName"] + " " + customer["lastName"]
+				})
+
+				orders = orders.map(order => {
+					return Object.assign(order, {customerID: customermap[order.customerID]})
+				})
+
 				db.pool.query(query3, (error, rows, fields) => {
 					let workers = rows
+
+					let workermap = {}
+					workers.map(worker => {
+						let id = parseInt(worker.workerID, 10)
+
+						workermap[id] = worker["firstName"] + " " + worker["lastName"]
+					})
+
+					// display NULL if null
+					orders = orders.map(order => {
+						return Object.assign(order, {workerID: order.workerID === null ? "NULL" : workermap[order.workerID]})
+					})
+
+					// console.log(workermap)
+
 					res.render('orders', {
 					title: "Orders",
 					data: orders, customers: customers, workers: workers
@@ -108,6 +140,7 @@ app.get('/cupcakesordered', function(req, res)
 	{
 		let query1 = "SELECT * FROM CupcakesOrdered;"
 		let query2 = "SELECT * FROM Orders;"
+		let query2_5 = "SELECT * FROM Customers"
 		let query3 = "SELECT * FROM Cupcakes;"
 
 		db.pool.query(query1, function(error,rows,fileds){
@@ -116,13 +149,60 @@ app.get('/cupcakesordered', function(req, res)
 			db.pool.query(query2, (error, rows, fields) => {
 				let orders = rows
 
-				db.pool.query(query3, (error, rows, fields) => {
-					let cupcakes = rows
-					res.render('cupcakesordered', {
-					title: "CupcakesOrdered",
-					data: cupcakesordered, orders: orders, cupcakes: cupcakes
+				// let ordermap = {}
+				// orders.map(order => {
+				// 	let id = parseInt(order.orderID, 10)
+
+				// 	ordermap[id] = order["customerID"] + " " + order["datePlaced"]
+				// })
+
+				// // map customerID in place or orderID in cupcakesordered
+				// cupcakesordered = cupcakesordered.map(cupcakeorder => {
+				// 	return Object.assign(cupcakeorder, {orderID: ordermap[cupcakeorder.orderID]})
+				// })
+
+				// query to display customer name in place of orderID
+				db.pool.query(query2_5, (error, rows, fields) => {
+					let customers = rows
+
+					let customermap = {}
+					customers.map(customer => {
+						let id = parseInt(customer.customerID, 10)
+
+						customermap[id] = customer["firstName"] + " " + customer["lastName"]
+					})
+
+					// display customer name instead of customerID in order
+					orders = orders.map(order => {
+						return Object.assign(order, {customerID: customermap[order.customerID]})
+					})
+
+					// display customer name instead of ID (build on last query for cupcakesordered)
+					// cupcakesordered = cupcakesordered.map(cupcakeorder => {
+					// 	return Object.assign(cupcakeorder, {orderID: customermap[cupcakeorder.orderID]})
+					// })
 				})
-			})
+
+					db.pool.query(query3, (error, rows, fields) => {
+						let cupcakes = rows
+
+						// display cupcakes by cakeFlavor, frostingFlavor
+						let cupcakemap = {}
+						cupcakes.map(cupcake => {
+							let id = parseInt(cupcake.cupcakeID, 10)
+
+							cupcakemap[id] = cupcake["cakeFlavor"] + ", " + cupcake["frostingFlavor"]
+						})
+
+						cupcakesordered = cupcakesordered.map(cupcakeorder => {
+							return Object.assign(cupcakeorder, {cupcakeID: cupcakemap[cupcakeorder.cupcakeID]})
+						})
+
+						res.render('cupcakesordered', {
+						title: "CupcakesOrdered",
+						data: cupcakesordered, orders: orders, cupcakes: cupcakes
+					})
+				})
 			})
 		})	
 	})
@@ -243,17 +323,23 @@ app.post('/add-order-ajax', function(req, res)
 	let data = req.body
 
 	let workerID = parseInt(data.workerID)
-	let datePickedup = data.datePickedup
+	let datePickedup = Date.parse(data.datePickedup)
 
 	if (isNaN(workerID)){
 		workerID = 'NULL'
 	}
-	if (datePickedup == ''){
-		datePickedup = 'NULL'
-	}
 
 	query1 = `INSERT INTO Orders (customerID, workerID, datePlaced, datePickedup, totalPrice)
-	VALUES (${data.customerID}, ${workerID}, '${data.datePlaced}', '${datePickedup}', ${data.totalPrice})`
+	VALUES (${data.customerID}, ${workerID}, '${data.datePlaced}', `
+
+	// query changes to make date null
+	if (isNaN(datePickedup)){
+		datePickedup = null
+		query1 += `${datePickedup}, ${data.totalPrice})`
+	} else {
+		query1 += `'${data.datePickedup}', ${data.totalPrice})`
+	}
+
 	db.pool.query(query1, function(error, rows, fields) {
 		if (error) {
 			console.log(error)
@@ -305,6 +391,34 @@ app.post('/add-cupcakesordered-ajax', function(req, res)
 	})	
 })
 
+
+app.delete('/delete-order-ajax', function(req, res, next)
+{
+	let data = req.body
+	let orderID = parseInt(data.id)
+	let delete_CupcakesOrdered = "DELETE FROM CupcakesOrdered WHERE orderID = ?"
+	let delete_Order = "DELETE FROM Orders WHERE orderID = ?"
+
+	// run first query
+	db.pool.query(delete_CupcakesOrdered, [orderID], function(error, rows, fields) {
+		if (error) {
+			console.log(error)
+			res.sendStatus(400)
+		}
+		else {
+			db.pool.query(delete_Order, [orderID], function(error, rows, fields) {
+				if (error) {
+					console.log(error)
+					res.sendStatus(400)
+				}
+				else {
+					res.sendStatus(204)
+				}
+			})
+		}
+	})
+})
+
 app.delete('/delete-cupcakesordered-ajax', function(req, res, next)
 {
 	let data = req.body
@@ -318,6 +432,62 @@ app.delete('/delete-cupcakesordered-ajax', function(req, res, next)
 		}
 		else {
 			res.sendStatus(204)
+		}
+	})
+})
+
+
+app.put('/put-order-ajax', function(req, res, next)
+{
+	let data = req.body
+
+	let orderID = parseInt(data.orderID)
+	let workerID = parseInt(data.workerID)
+	let datePickedup = Date.parse(data.datePickedup)
+
+	if (isNaN(workerID)){
+		workerID = null
+	}
+
+	// 2 queries to update worker
+	let queryUpdateWorker = `UPDATE Orders SET workerID = ? WHERE orderID = ?`
+	let selectWorker = `SELECT * FROM Workers WHERE workerID = ?`
+
+	// query to update datePickedup - different if null
+	let queryUpdateDate = `UPDATE Orders SET datePickedup = `
+	if (isNaN(datePickedup)){
+		datePickedup = null
+		queryUpdateDate += `${datePickedup} `
+	} else {
+		queryUpdateDate += `'${data.datePickedup}' `
+	}
+	queryUpdateDate += `WHERE orderID = ?`
+
+	// run first query for workers
+	db.pool.query(queryUpdateWorker, [workerID, orderID], function(error, rows, fields) {
+		if (error) {
+			console.log(error)
+			res.sendStatus(400)
+		}
+		// second workers query
+		else {
+			db.pool.query(selectWorker, [workerID], function(error, rows, fields) {
+				if (error) {
+					console.log(error)
+					res.sendStatus(400)
+				}
+				else {
+					db.pool.query(queryUpdateDate, [orderID], function(error, rows, fields) {
+						if (error) {
+							console.log(error)
+							res.sendStatus(400)
+						}
+						else {
+							res.send(rows)
+						}
+					})
+				}
+			})
 		}
 	})
 })
@@ -337,7 +507,6 @@ app.put('/put-cupcakesordered-ajax', function(req, res, next)
 			console.log(error)
 			res.sendStatus(400)
 		}
-		// run second query
 		else {
 			res.send(rows)
 		}

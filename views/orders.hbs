@@ -6,29 +6,19 @@
             <label for="add-customerID">Customer ID</label> <select name="add-customerID" id="add-customerID" required>
                 <option value="">&nbsp;</option>
                 {{#each customers}}
-                <option value="{{this.customerID}}">{{this.customerID}}</option>
+                <option value="{{this.customerID}}">{{this.firstName}} {{this.lastName}}</option>
                 {{/each}}
             </select>
             <label for="add-workerID">Worker ID</label> <select name="add-workerID" id="add-workerID">
                 <option value="">None</option>
                 {{#each workers}}
-                <option value="{{this.workerID}}">{{this.workerID}}</option>
+                <option value="{{this.workerID}}">{{this.firstName}} {{this.lastName}}</option>
                 {{/each}}
             </select>
             <label for="add-datePlaced">Date Placed</label> <input type="date" name="add-datePlaced" id="add-datePlaced" required>
-            <label for="add-datePickedup">Date Pickedup</label> <input type="date" name="add-datePickedup" id="add-datePickedup" value="">
+            <label for="add-datePickedup">Date Pickedup</label> <input type="date" name="add-datePickedup" id="add-datePickedup">
             <label for="add-totalPrice">Total Price</label> <input type="number" min="0" step=".01" name="add-totalPrice" id="add-totalPrice" required>
         </fieldset>
-        {{!-- <fieldset id="cupcakesOrdered-add-form">
-            <label for="cupcakeID">Cupcake ID</label> <select name="cupcakeID" id="cupcakeID">
-                <option value="0">&nbsp;</option>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-            </select>
-            <label for="quantity">Quantity</label> <input type="number" name="quantity" id="quantity"><br>
-        </fieldset> --}}
-        {{!-- <p><input type="button" id="add-new-cupcakesordered" value="Add New"></p> --}}
         <input type="submit" value="Add Order">
         <input type="reset" class="cancel" value="Cancel">
     </form>
@@ -43,24 +33,55 @@
         <thead>
             <tr>
                 <th><button id="new-button">Add</button></th> 
-                {{#each data.[0]}}
-                <th>{{@key}}</th>
-                {{/each}}
+                <th>ID</th>
+                <th>Customer</th>
+                <th>Worker</th>
+                <th>Date Placed</th>
+                <th>Date Picked Up</th>
+                <th>Total</th>
             </tr>
         </thead>
 
         <tbody>
             {{#each data}}
             <tr>
-                <td><button id="delete-button">Delete</button></td>
+                <td><button id="delete-button" onclick="deleteOrder({{this.orderID}})">Delete</button></td>
                 <td align="center">{{this.orderID}}</td>
                 <td align="center">{{this.customerID}}</td>
                 <td align="center">{{checkNull this.workerID}}</td>
                 <td align="center">{{dateFormat this.datePlaced}}</td>
-                <td align="center">{{checkNull (dateFormat this.datePickedup)}}</td>
+                <td align="center">{{dateFormat this.datePickedup}}</td>
                 <td align="right">{{displayPrice this.totalPrice}}</td>
             </tr>
             {{/each}}
         </tbody>
     </table>
 </div>
+
+<script src="./js/delete_order.js"></script>
+
+{{!-- update --}}
+<div id="edit">
+    <h3>Update order</h3>
+    <form id="update-order-form-ajax">
+        <fieldset>
+            <label for="update-orderID">ID</label> <select name="update-orderID" id="update-orderID" required>
+                <option value="">&nbsp;</option>
+                {{#each data}}
+                <option value="{{this.orderID}}">{{this.orderID}}</option>
+                {{/each}}
+            </select>
+            <label for="update-workerID">Worker</label> <select name="update-workerID" id="update-workerID">
+                <option value="">None</option>
+                {{#each workers}}
+                <option value="{{this.workerID}}">{{this.firstName}} {{this.lastName}}</option>
+                {{/each}}
+            </select>
+            <label for="update-datePickedup">Pick Up Date</label> <input type="date" name="update-datePickedup" id="update-datePickedup">
+        </fieldset>
+        <input type="submit" id="update-order-submit" value="Update Order">
+        <input type="reset" value="Cancel">
+    </form>
+</div>
+
+<script src="./js/update_order.js"></script>

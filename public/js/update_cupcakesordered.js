@@ -17,11 +17,6 @@ updateCupcakesOrderedForm.addEventListener("submit", function (e) {
 	let chosenIDValue = chosenID.value
 	let quantityValue = inputQuantity.value
 
-	// check for selection
-	// if (chosenIDValue == ''){
-	// 	return
-	// }
-	// check for 0 in quantity
 	if (isNaN(quantityValue) || quantityValue < 1) {
 		return
 	}
@@ -58,7 +53,7 @@ function updateRow(data, cupcakesOrderedID) {
 	let table = document.getElementById("cupcakesordered-table")
 
 	for (let i = 0, row; row = table.rows[i]; i++) {
-		// match orderID AND cupcakeID
+		// match ID
 		if (table.rows[i].getAttribute("data-value") == cupcakesOrderedID){
 			// get location of quantity col in row to update
 			let updateRowIndex = table.getElementsByTagName("tr")[i]

@@ -80,9 +80,9 @@ addRowToTable = (data) => {
    delCellButton = document.createElement("button")
    delCellButton.id = "delete-button"
    delCellButton.innerHTML = "Delete"
-   // delCellButton.onclick = function() {
-   //    deleteWorker(newRow.workerID)
-   // }
+   delCellButton.onclick = function() {
+      deleteOrder(newRow.orderID)
+   }
    delCell.appendChild(delCellButton)
 
    // fill cells
@@ -113,4 +113,10 @@ addRowToTable = (data) => {
 
    // add row to table
    currentTable.appendChild(row)
+
+   let selectMenu = document.getElementById("update-orderID")
+   let option = document.createElement("option")
+   option.value = newRow.orderID
+   option.text = newRow.orderID
+   selectMenu.add(option)
 }

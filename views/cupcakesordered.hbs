@@ -3,16 +3,16 @@
     <h3>Add new cupcakesOrdered</h3>
     <form id="add-cupcakesordered-form-ajax">
         <fieldset>
-            <label for="add-orderID">Order ID</label> <select name="add-orderID" id="add-orderID" required>
+            <label for="add-orderID">Order</label> <select name="add-orderID" id="add-orderID" required>
                 <option value="">&nbsp;</option>
                 {{#each orders}}
-                <option value="{{this.orderID}}">{{this.orderID}}</option>
+                <option value="{{this.orderID}}">{{this.customerID}} {{dateFormat this.datePlaced}}</option>
                 {{/each}}
             </select>
-            <label for="add-cupcakeID">Cupcake ID</label> <select name="add-cupcakeID" id="add-cupcakeID" required>
+            <label for="add-cupcakeID">Cupcake</label> <select name="add-cupcakeID" id="add-cupcakeID" required>
                 <option value="">&nbsp;</option>
                 {{#each cupcakes}}
-                <option value="{{this.cupcakeID}}">{{this.cupcakeID}}</option>
+                <option value="{{this.cupcakeID}}">{{this.cakeFlavor}}, {{this.frostingFlavor}}</option>
                 {{/each}}
             </select>
             <label for="add-quantity">Quantity</label> <input type="number" min="1" name="add-quantity" id="add-quantity" required>
@@ -26,14 +26,15 @@
 
 {{!-- display --}}
 <div id="display">
-    <h3>View CupcakesOrdered</h3>
+    <h3>View cupcakes in orders</h3>
     <table id="cupcakesordered-table">
         <thead>
             <tr>
                 <th><button id="new-button">Add</button></th> 
-                {{#each data.[0]}}
-                <th>{{@key}}</th>
-                {{/each}}
+                <th>ID</th>
+                <th>Order ID</th>
+                <th>Cupcake</th>
+                <th>Quantity</th>
             </tr>
         </thead>
 
@@ -53,11 +54,12 @@
 
 <script src="./js/delete_cupcakesordered.js"></script>
 
+{{!-- update --}}
 <div id="edit">
-    <h3>Update Cupcakes in Order</h3>
+    <h3>Update cupcakes in order</h3>
     <form id="update-cupcakesordered-form-ajax">
         <fieldset>
-            <label for="update-cupcakesOrderedID">Order ID</label> <select name="update-cupcakesOrderedID" id="update-cupcakesOrderedID">
+            <label for="update-cupcakesOrderedID">ID</label> <select name="update-cupcakesOrderedID" id="update-cupcakesOrderedID">
                 <option value="">&nbsp;</option>
                 {{#each data}}
                 <option value="{{this.cupcakesOrderedID}}">{{this.cupcakesOrderedID}}</option>

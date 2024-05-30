@@ -35,7 +35,18 @@ function deleteRow(cupcakesOrderedID) {
 	for (let i = 0, row; row = table.rows[i]; i++) {
 		if (table.rows[i].getAttribute("data-value") == cupcakesOrderedID) {
 			table.deleteRow(i)
+			deleteDropDownMenu(cupcakesOrderedID)
 			break
 		}
 	}
+}
+
+function deleteDropDownMenu(cupcakesOrderedID) {
+   let selectMenu = document.getElementById("update-cupcakesOrderedID")
+   for (let i = 0; i < selectMenu.length; i++) {
+      if (Number(selectMenu.options[i].value) === Number(cupcakesOrderedID)) {
+         selectMenu[i].remove()
+         break
+      }
+   }
 }

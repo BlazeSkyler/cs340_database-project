@@ -4,8 +4,8 @@
     <form id="add-cupcake-form-ajax">
         <fieldset>
             <label for="add-cakeFlavor">Cake Flavor</label> <input type="text" name="add-cakeFlavor" id="add-cakeFlavor" required>
-            <label for="add-cakeColor">Cake Color</label> <input type="text" name="add-cakeColor" id="add-cakeColor">
             <label for="add-frostingFlavor">Frosting Flavor</label> <input type="text" name="add-frostingFlavor" id="add-frostingFlavor" required>
+            <label for="add-cakeColor">Cake Color</label> <input type="text" name="add-cakeColor" id="add-cakeColor">
             <label for="add-frostingColor">Frosting Color</label> <input type="text" name="add-frostingColor" id="add-frostingColor">
             <label for="add-price">Price</label> <input type="number" min="0" step=".01" name="add-price" id="add-price" required>
         </fieldset>
@@ -23,9 +23,12 @@
         <thead>
             <tr>
                 <th><button id="new-button">Add</button></th> 
-                {{#each data.[0]}}
-                <th>{{@key}}</th>
-                {{/each}}
+                <th>ID</th>
+                <th>Cake Flavor</th>
+                <th>Frosting Flavor</th>
+                <th>Cake Color</th>
+                <th>Frosting Color</th>
+                <th>Price</th>
             </tr>
         </thead>
 
@@ -35,8 +38,8 @@
                 <td><button id="delete-button">Delete</button></td>
                 <td align="center">{{this.cupcakeID}}</td>
                 <td>{{this.cakeFlavor}}</td>
-                <td>{{checkNull this.cakeColor}}</td>
                 <td>{{this.frostingFlavor}}</td>
+                <td>{{checkNull this.cakeColor}}</td>
                 <td>{{checkNull this.frostingColor}}</td>
                 <td align="right">{{displayPrice this.price}}</td>
             </tr>
