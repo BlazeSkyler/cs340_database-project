@@ -35,7 +35,7 @@
         <tbody>
             {{#each data}}
             <tr>
-                <td><button id="delete-button">Delete</button></td>
+                <td><button id="delete-button" onclick="deleteCupcake({{this.cupcakeID}})">Delete</button></td>
                 <td align="center">{{this.cupcakeID}}</td>
                 <td>{{this.cakeFlavor}}</td>
                 <td>{{this.frostingFlavor}}</td>
@@ -47,3 +47,5 @@
         </tbody>
     </table>
 </div>
+
+<script src="./js/delete_cupcake.js"></script>

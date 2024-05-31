@@ -33,7 +33,7 @@
         <tbody>
             {{#each data}}
             <tr>
-                <td><button id="delete-button">Delete</button></td>
+                <td><button id="delete-button" onclick="deleteCustomer({{this.customerID}})">Delete</button></td>
                 <td align="center">{{this.customerID}}</td>
                 <td>{{this.firstName}}</td>
                 <td>{{this.lastName}}</td>
@@ -44,3 +44,5 @@
         </tbody>
     </table>
 </div>
+
+<script src="./js/delete_customer.js"></script>

@@ -392,6 +392,78 @@ app.post('/add-cupcakesordered-ajax', function(req, res)
 })
 
 
+app.delete('/delete-customer-ajax', function(req, res, next)
+{
+	let data = req.body
+	let customerID = parseInt(data.id)
+	let delete_Order = `DELETE FROM Orders WHERE customerID = ?`
+	let delete_Customer = `DELETE FROM Customers WHERE customerID = ?`
+
+	// first query to delete form orders
+	db.pool.query(delete_Order, [customerID], function(error, rows, fields) {
+		if (error) {
+			console.log(error)
+			res.sendStatus(400)
+		}
+		// second query delete from customers table
+		else {
+			db.pool.query(delete_Customer, [customerID], function(errors, rows, fields) {
+				if (error) {
+					console.log(error)
+					res.sendStatus(400)
+				}
+				else {
+					res.sendStatus(204)
+				}
+			})
+		}
+	})
+})
+
+app.delete('/delete-worker-ajax', function(req, res, next)
+{
+	let data = req.body
+	let workerID = parseInt(data.id)
+	let delete_Worker = `DELETE FROM Workers WHERE workerID = ?`
+
+	db.pool.query(delete_Worker, [workerID], function(error, rows, fields) {
+		if (error) {
+			console.log(error)
+			res.sendStatus(400)
+		}
+		else {
+			res.sendStatus(204)
+		}
+	})
+})
+
+app.delete('/delete-cupcake-ajax', function(req, res, next)
+{
+	let data = req.body
+	let cupcakeID = parseInt(data.id)
+	let delete_CupcakesOrdered = `DELETE FROM CupcakesOrdered WHERE cupcakeID = ?`
+	let delete_Cupcake = `DELETE FROM Cupcakes WHERE cupcakeID = ?`
+
+	// delete from CupcakesOrdered
+	db.pool.query(delete_CupcakesOrdered, [cupcakeID], function(error, rows, fields) {
+		if (error) {
+			console.log(error)
+			res.sendStatus(400)
+		}
+		else {
+			db.pool.query(delete_Cupcake, [cupcakeID], function(error, rows, fields) {
+				if (error) {
+					console.log(error)
+					res.sendStatus(400)
+				}
+				else {
+					res.sendStatus(204)
+				}
+			})
+		}
+	})
+})
+
 app.delete('/delete-order-ajax', function(req, res, next)
 {
 	let data = req.body

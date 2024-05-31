@@ -3,20 +3,20 @@
     <h3>Add new order</h3>
     <form id="add-order-form-ajax">
         <fieldset>
-            <label for="add-customerID">Customer ID</label> <select name="add-customerID" id="add-customerID" required>
+            <label for="add-customerID">Customer</label> <select name="add-customerID" id="add-customerID" required>
                 <option value="">&nbsp;</option>
                 {{#each customers}}
                 <option value="{{this.customerID}}">{{this.firstName}} {{this.lastName}}</option>
                 {{/each}}
             </select>
-            <label for="add-workerID">Worker ID</label> <select name="add-workerID" id="add-workerID">
+            <label for="add-workerID">Worker</label> <select name="add-workerID" id="add-workerID">
                 <option value="">None</option>
                 {{#each workers}}
                 <option value="{{this.workerID}}">{{this.firstName}} {{this.lastName}}</option>
                 {{/each}}
             </select>
             <label for="add-datePlaced">Date Placed</label> <input type="date" name="add-datePlaced" id="add-datePlaced" required>
-            <label for="add-datePickedup">Date Pickedup</label> <input type="date" name="add-datePickedup" id="add-datePickedup">
+            <label for="add-datePickedup">Date Picked Up</label> <input type="date" name="add-datePickedup" id="add-datePickedup">
             <label for="add-totalPrice">Total Price</label> <input type="number" min="0" step=".01" name="add-totalPrice" id="add-totalPrice" required>
         </fieldset>
         <input type="submit" value="Add Order">

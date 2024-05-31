@@ -75,9 +75,9 @@ addRowToTable = (data) => {
    delCellButton = document.createElement("button")
    delCellButton.id = "delete-button"
    delCellButton.innerHTML = "Delete"
-   // delCellButton.onclick = function() {
-   //    deleteWorker(newRow.workerID)
-   // }
+   delCellButton.onclick = function() {
+      deleteWorker(newRow.workerID)
+   }
    delCell.appendChild(delCellButton)
 
    // fill cells
