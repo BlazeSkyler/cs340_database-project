@@ -72,8 +72,8 @@ addRowToTable = (data) => {
    let delCell = document.createElement("td")
    let cupcakeIDCell = document.createElement("td")
    let cakeFlavorCell = document.createElement("td")
-   let cakeColorCell = document.createElement("td")
    let frostingFlavorCell = document.createElement("td")
+   let cakeColorCell = document.createElement("td")
    let frostingColorCell = document.createElement("td")
    let priceCell = document.createElement("td")
 
@@ -91,8 +91,8 @@ addRowToTable = (data) => {
    // fill cells
    cupcakeIDCell.innerText = newRow.cupcakeID
    cakeFlavorCell.innerText = newRow.cakeFlavor
-   cakeColorCell.innerText = newRow.cakeColor
    frostingFlavorCell.innerText = newRow.frostingFlavor
+   cakeColorCell.innerText = newRow.cakeColor
    frostingColorCell.innerText = newRow.frostingColor
    priceCell.innerText = newRow.price
 
@@ -105,8 +105,8 @@ addRowToTable = (data) => {
    row.appendChild(delCell)
    row.appendChild(cupcakeIDCell)
    row.appendChild(cakeFlavorCell)
-   row.appendChild(cakeColorCell)
    row.appendChild(frostingFlavorCell)
+   row.appendChild(cakeColorCell)
    row.appendChild(frostingColorCell)
    row.appendChild(priceCell)
 
