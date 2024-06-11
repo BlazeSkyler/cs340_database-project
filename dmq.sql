@@ -1,4 +1,4 @@
--- These are some Database Manipulation queries for a partially implemented Project Website 
+-- These are some Database Manipulation queries for our Project Website 
 -- using the Cupcakes database.
 
 -- get all Customers

@@ -1,3 +1,14 @@
+/*
+CS 340 Portfolio Project
+
+Project Title:
+38 Cupcakes
+
+Group Members:
+Skyler Ucol
+Gervasius Kevin Juanda
+
+*/
 -- Disable Commits and Foreign Key Cheks
 SET FOREIGN_KEY_CHECKS=0;
 SET AUTOCOMMIT = 0;
